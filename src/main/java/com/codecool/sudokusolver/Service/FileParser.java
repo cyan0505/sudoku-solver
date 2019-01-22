@@ -23,9 +23,7 @@ public class FileParser {
 
             String[] row = line.split(",");
             int[] sudokuRow = Arrays.asList(row).stream().mapToInt(Integer::parseInt).toArray();
-            for(int i = 0; i < sudokuRow.length; i++){
-                board[counter][i] = sudokuRow[i];
-            }
+            System.arraycopy(sudokuRow, 0, board[counter], 0, sudokuRow.length);
             counter++;
         }
 

@@ -21,7 +21,7 @@ public class Solving_algorithm {
 
     }
 
-    boolean solve() {
+    public boolean solve() {
         for (int row = BOARD_START_INDEX; row < BOARD_SIZE; row++) {
 
             for (int column = BOARD_START_INDEX; column < BOARD_SIZE; column++) {
@@ -90,7 +90,7 @@ public class Solving_algorithm {
         return true;
     }
 
-    void printBoard() {
+    public void printBoard() {
 
         for (int row = 0; row < 9; row++) {
             for (int column = 0; column < 9; column++) {
