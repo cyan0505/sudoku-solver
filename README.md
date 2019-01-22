@@ -18,7 +18,7 @@
 
 ### Tools:
 1. IntelliJ IDEA
-
+2. Visual Studio Code
 
 ### Authors: 
 - Bartosz Pyrz [Github profile](https://github.com/Czakero)
