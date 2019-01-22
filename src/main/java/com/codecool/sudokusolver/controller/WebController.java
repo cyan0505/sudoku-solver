@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+
 @Controller
 public class WebController {
     private ISudokuSolver sudokuSolver;
@@ -20,13 +22,25 @@ public class WebController {
 
 
     @PostMapping("/home")
-    public String handlerSolvedSudoku(@RequestParam MultipartFile file, Model model) {
+    public String handlerSolvedSudoku(@RequestParam MultipartFile file, Model model) throws IOException {
         model.addAttribute("solvedSudoku", sudokuSolver.solve(file));
         return "result";
     }
 
-//    @GetMapping("/home")
-//    public String handleHome() {
-//
-//    }
+    @GetMapping("/home")
+    public String handleHome() {
+        return "index";
+    }
+
+    @GetMapping("/solver")
+    public String handleSolver() {
+        return "solver";
+    }
+
+    @GetMapping("/about")
+    public String handleAbout() {
+        return "about";
+    }
+
+
 }
