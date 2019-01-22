@@ -14,7 +14,6 @@ public class FileParser {
         BufferedReader reader = new BufferedReader(new FileReader(fileName));
 
         List<String> lines = new ArrayList<>();
-        List<int[]> sudokuBoard = new ArrayList<>();
         int counter = 0;
         int[][] board = new int[9][9];
 
@@ -24,12 +23,9 @@ public class FileParser {
 
             String[] row = line.split(",");
             int[] sudokuRow = Arrays.asList(row).stream().mapToInt(Integer::parseInt).toArray();
-            sudokuBoard.add(sudokuRow);
-
             for(int i = 0; i < sudokuRow.length; i++){
                 board[counter][i] = sudokuRow[i];
             }
-
             counter++;
         }
 
@@ -38,4 +34,9 @@ public class FileParser {
     }
 
 
+    public void display(int[][] table) {
+        for(int[] element : table){
+            System.out.println(Arrays.toString(element));
+        }
+    }
 }
