@@ -1,6 +1,3 @@
-# Compiled class file
-*.class
-
 # Log file
 *.log
 
@@ -24,6 +21,9 @@ hs_err_pid*
 
 # Mac folder properties
 .DS_STORE
+
+# target (compile) folder
+target/
 
 ### IntelliJ IDEA ###
 .idea/
