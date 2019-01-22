@@ -1,34 +1,50 @@
 package com.codecool.sudokusolver;
 
+import com.codecool.sudokusolver.service.FileParser;
+import com.codecool.sudokusolver.service.ISudokuSolver;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 import java.util.stream.IntStream;
 
-public class Solving_algorithm {
 
-    private int[][] board;
-
-    private final int NO_VALUE = 0;
-    private final int MIN_VALUE = 1;
-    private final int MAX_VALUE = 9;
-    private final int BOARD_START_INDEX = 0;
-    private int SUBSECTION_SIZE;
-    private int BOARD_SIZE;
+@Service
+public class Backtrack implements ISudokuSolver {
 
 
-    public Solving_algorithm(int[][] board){
-        this.board = board;
-        this.BOARD_SIZE = this.board.length;
-        this.SUBSECTION_SIZE = (int) Math.sqrt((double)this.BOARD_SIZE);
+    private static final int NO_VALUE = 0;
+    private static final int MIN_VALUE = 1;
+    private static final int MAX_VALUE = 9;
+    private static final int BOARD_START_INDEX = 0;
+    private static final int SUBSECTION_SIZE = 3;
+    private static final int BOARD_SIZE = 9;
+    private FileParser fileParser;
 
+
+    @Autowired
+    public Backtrack(FileParser fileParser){
+        this.fileParser = fileParser;
     }
 
-    public boolean solve() {
+    public int[][] solve(MultipartFile file) throws IOException {
+
+        int[][] toSolveBoard = fileParser.parseFile(file);
+
+        parseSudokuThroughAlgorithm(toSolveBoard);
+
+        return toSolveBoard;
+    }
+
+    private boolean parseSudokuThroughAlgorithm(int[][] board) throws IOException {
         for (int row = BOARD_START_INDEX; row < BOARD_SIZE; row++) {
 
             for (int column = BOARD_START_INDEX; column < BOARD_SIZE; column++) {
                 if (board[row][column] == NO_VALUE) {
                     for (int k = MIN_VALUE; k <= MAX_VALUE; k++) {
                         board[row][column] = k;
-                        if (isValid(board, row, column) && solve()) {
+                        if (isValid(board, row, column) && parseSudokuThroughAlgorithm(board)) {
                             return true;
                         }
                         board[row][column] = NO_VALUE;
@@ -78,7 +94,7 @@ public class Solving_algorithm {
         return true;
     }
 
-    boolean checkConstraint(int[][] board, int row, boolean[] constraint, int column) {
+    private boolean checkConstraint(int[][] board, int row, boolean[] constraint, int column) {
 
         if (board[row][column] != NO_VALUE) {
             if (!constraint[board[row][column] - 1]) {
@@ -90,14 +106,5 @@ public class Solving_algorithm {
         return true;
     }
 
-    public void printBoard() {
-
-        for (int row = 0; row < 9; row++) {
-            for (int column = 0; column < 9; column++) {
-                System.out.print(board[row][column] + " ");
-            }
-            System.out.println();
-        }
-    }
 
 }
