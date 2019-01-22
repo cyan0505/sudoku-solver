@@ -57,15 +57,15 @@
                 </div>
 
                 <!-- FILE -->
-                <form>
+                <form id="uploadForm" method="POST" action="/solver" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="exampleFormControlFile1">Input sudoku file here!</label>
-                        <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                        <input type="file" name="file" class="form-control-file" id="exampleFormControlFile1">
                     </div>
+                    <!-- BUTTON -->
+                    <button type="submit" class="btn btn-success btn-lg"><i class="fas fa-th"></i> Solve!</button>
                 </form>
-            
-                <!-- BUTTON -->
-                <button type="button" class="btn btn-success btn-lg"><i class="fas fa-th"></i> Solve!</button>
+
             </div>
 
             <div class="flex-grow-1 align-items-center">

@@ -21,10 +21,12 @@ public class WebController {
     }
 
 
-    @PostMapping("/home")
+    @PostMapping("/solver")
     public String handlerSolvedSudoku(@RequestParam MultipartFile file, Model model) throws IOException {
         model.addAttribute("solvedSudoku", sudokuSolver.solve(file));
-        return "result";
+        System.out.println("hello");
+
+        return "solver";
     }
 
     @GetMapping("/home")
