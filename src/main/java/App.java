@@ -1,4 +1,4 @@
-import com.codecool.sudokusolver.Service.FileParser;
+import com.codecool.sudokusolver.service.FileParser;
 import com.codecool.sudokusolver.Solving_algorithm;
 
 import java.io.IOException;

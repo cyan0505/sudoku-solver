@@ -1,4 +1,4 @@
-package com.codecool.sudokusolver.Service;
+package com.codecool.sudokusolver.service;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
