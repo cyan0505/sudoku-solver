@@ -16,8 +16,8 @@
         crossorigin="anonymous">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" th:href="style.css">
+    <link rel="stylesheet" th:href="index.css">
 
     <title>Sudoku solver</title>
 </head>
@@ -25,20 +25,20 @@
     
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="index.html">sudoku solver</a>
+        <a class="navbar-brand" th:href="home">sudoku solver</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="index.html">Home<span class="sr-only">(current)</span></a>
+              <a class="nav-link" th:href="home">Home<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="solver.html">Solver</a>
+                <a class="nav-link" th:href="solver">Solver</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="about.html">About</a>
+              <a class="nav-link" th:href="about">About</a>
             </li>
           </ul>
         </div>
@@ -50,7 +50,7 @@
             <h1>Sudoku solver</h1>
             <h3>Solve your sudoku with us!</h3>
             <hr>
-            <a class="btn btn-secondary btn-lg" href="solver.html" role="button"><i class="fas fa-th"></i> Get started!</a>
+            <a class="btn btn-secondary btn-lg" th:href="solver" role="button"><i class="fas fa-th"></i> Get started!</a>
         </div>    
 
     </div>
