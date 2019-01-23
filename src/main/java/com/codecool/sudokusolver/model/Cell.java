@@ -1,13 +1,18 @@
 package com.codecool.sudokusolver.model;
 
+import lombok.Data;
+
 import java.util.ArrayList;
 import java.util.List;
 
+
+@Data
 public class Cell {
 
-    private int column;
-    private int row;
-    private int value = 0;
+    private final int column;
+    private final int row;
+    private int value;
+    private int square;
     private List<Integer> possibleResults;
 
 
@@ -16,42 +21,39 @@ public class Cell {
         this.row = row;
         this.value = value;
         this.possibleResults = new ArrayList<>();
-    }
-
-    public Cell(int column, int row) {
-        this(column, row, 0);
+        setSquare(row, column);
     }
 
 
-    public int getColumn() {
-        return column;
+    public void addValue(int value){
+        this.possibleResults.add(value);
     }
 
-    public void setColumn(int column) {
-        this.column = column;
+
+    private void setSquare(int row, int column) {
+
+        if(row <= 3 && column <= 3){
+            this.square = 1;
+        } else if (row >= 1 && row <= 3 && column >= 4 && column <= 6){
+            this.square = 2;
+        } else if (row >= 1 && row <= 3 && column >= 7) {
+            this.square = 3;
+        } else if (row >= 4 && row <= 6 && column >= 1 && column <= 3) {
+            this.square = 4;
+        } else if (row >= 4 && row <= 6 && column >= 4 && column <= 6) {
+            this.square = 5;
+        } else if (row >= 4 && row <= 6 && column >= 7) {
+            this.square = 6;
+        } else if (row >= 7 && column <= 3) {
+            this.square = 7;
+        } else if (row >= 7 && column >= 4 && column <= 6) {
+            this.square = 8;
+        } else if ( row >= 7 && column >= 7) {
+            this.square = 9;
+        }
+
     }
 
-    public int getRow() {
-        return row;
-    }
 
-    public void setRow(int row) {
-        this.row = row;
-    }
 
-    public int getValue() {
-        return value;
-    }
-
-    public void setValue(int value) {
-        this.value = value;
-    }
-
-    public List<Integer> getPossibleResults() {
-        return possibleResults;
-    }
-
-    public void setPossibleResults(List<Integer> possibleResults) {
-        this.possibleResults = possibleResults;
-    }
 }

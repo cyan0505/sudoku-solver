@@ -1,4 +1,3 @@
-import com.codecool.sudokusolver.Backtrack;
 import com.codecool.sudokusolver.service.FileParser;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;

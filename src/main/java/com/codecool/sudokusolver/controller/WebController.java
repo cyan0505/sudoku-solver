@@ -1,6 +1,5 @@
 package com.codecool.sudokusolver.controller;
 
-import com.codecool.sudokusolver.service.ISudokuSolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,7 +29,10 @@ public class WebController {
 
     @PostMapping("/sudoku")
     public String handleSudokuBoard(@RequestParam MultipartFile file, Model model) throws IOException{
-        model.addAttribute("sudoku", sudokuSolver.uploadBoard(file));
+//        model.addAttribute("sudoku", sudokuSolver.uploadBoard(file));
+
+
+
         return "sudoku";
     }
 
