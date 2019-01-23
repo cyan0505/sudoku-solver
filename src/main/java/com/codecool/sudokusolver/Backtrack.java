@@ -49,12 +49,17 @@ public class Backtrack implements ISudokuSolver {
 
             for (int column = BOARD_START_INDEX; column < BOARD_SIZE; column++) {
                 if (board[row][column] == NO_VALUE) {
-                    for (int k = MIN_VALUE; k <= MAX_VALUE; k++) {
-                        board[row][column] = k;
-                        if (isValid(board, row, column) && parseSudokuThroughAlgorithm(board)) {
-                            return true;
+
+                    for (int number = MIN_VALUE; number <= MAX_VALUE; number++) {
+                        if (isOk(row, column, number, board)) {
+                            board[row][column] = number;
+
+                            if (parseSudokuThroughAlgorithm(board))
+                                return true;
+                            else {
+                                board[row][column] = NO_VALUE;
+                            }
                         }
-                        board[row][column] = NO_VALUE;
                     }
                     return false;
                 }
@@ -63,54 +68,40 @@ public class Backtrack implements ISudokuSolver {
         return true;
     }
 
-    private boolean isValid(int[][] board, int row, int column) {
 
-        return (rowConstraint(board, row)
-                && columnConstraint(board, column)
-                && subsectionConstraint(board, row, column));
+    private boolean isInRow(int row, int number, int[][] board) {
+
+        for(int i = 0; i < BOARD_SIZE; i++){
+            if(board[row][i] == number)
+                return true;
+        }
+        return false;
     }
 
-    private boolean rowConstraint(int[][] board, int row) {
+    private boolean isInColumn(int col, int number, int[][] board) {
 
-        boolean[] constraint = new boolean[BOARD_SIZE];
-        return IntStream.range(BOARD_START_INDEX, BOARD_SIZE)
-                .allMatch(column -> checkConstraint(board, row, constraint, column));
+        for(int i = 0; i < BOARD_SIZE; i++){
+            if(board[i][col] == number)
+                return true;
+        }
+        return false;
     }
 
-    private boolean columnConstraint(int[][] board, int column) {
+    private boolean isInSubsquare(int row, int col, int number, int[][] board){
+        int r = row - row % 3;
+        int c = col - col % 3;
 
-        boolean[] constraint = new boolean[BOARD_SIZE];
-        return IntStream.range(BOARD_START_INDEX, BOARD_SIZE)
-                .allMatch(row -> checkConstraint(board, row, constraint, column));
-    }
-
-    private boolean subsectionConstraint(int[][] board, int row, int column) {
-
-        boolean[] constraint = new boolean[BOARD_SIZE];
-        int subsectionRowStart = (row / SUBSECTION_SIZE) * SUBSECTION_SIZE;
-        int subsectionRowEnd = subsectionRowStart + SUBSECTION_SIZE;
-
-        int subsectionColumnStart = (column / SUBSECTION_SIZE) * SUBSECTION_SIZE;
-        int subsectionColumnEnd = subsectionColumnStart + SUBSECTION_SIZE;
-
-        for (int r = subsectionRowStart; r < subsectionRowEnd; r++) {
-            for (int c = subsectionColumnStart; c < subsectionColumnEnd; c++) {
-                if (!checkConstraint(board, r, constraint, c)) return false;
+        for(int i = r; i < r + 3; i++){
+            for(int j = c; j < c + 3; j++){
+                if(board[i][j] == number)
+                    return true;
             }
         }
-        return true;
+        return false;
     }
 
-    private boolean checkConstraint(int[][] board, int row, boolean[] constraint, int column) {
-
-        if (board[row][column] != NO_VALUE) {
-            if (!constraint[board[row][column] - 1]) {
-                constraint[board[row][column] - 1] = true;
-            } else {
-                return false;
-            }
-        }
-        return true;
+    private boolean isOk(int row, int col, int number, int[][] board){
+        return !isInRow(row, number, board) && !isInColumn(col, number, board) && !isInSubsquare(row, col, number, board);
     }
 
 
