@@ -7,18 +7,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.stream.IntStream;
 
 
 @Service
-public class Backtrack implements ISudokuSolver {
+public class Backtrack extends Thread implements ISudokuSolver {
 
 
     private static final int NO_VALUE = 0;
     private static final int MIN_VALUE = 1;
     private static final int MAX_VALUE = 9;
     private static final int BOARD_START_INDEX = 0;
-    private static final int SUBSECTION_SIZE = 3;
     private static final int BOARD_SIZE = 9;
     private FileParser fileParser;
 
@@ -39,7 +37,14 @@ public class Backtrack implements ISudokuSolver {
 
         int[][] toSolveBoard = fileParser.parseFile(file);
 
-        parseSudokuThroughAlgorithm(toSolveBoard);
+        new Thread(() -> {
+            try {
+                parseSudokuThroughAlgorithm(toSolveBoard);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }).start();
+
 
         return toSolveBoard;
     }
@@ -101,6 +106,7 @@ public class Backtrack implements ISudokuSolver {
     }
 
     private boolean isOk(int row, int col, int number, int[][] board){
+
         return !isInRow(row, number, board) && !isInColumn(col, number, board) && !isInSubsquare(row, col, number, board);
     }
 
