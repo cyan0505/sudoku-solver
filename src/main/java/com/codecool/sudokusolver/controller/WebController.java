@@ -28,9 +28,9 @@ public class WebController {
     }
 
 
-    @PostMapping("/sudoku")
+    @PostMapping("/solver")
     public String handleSudokuBoard(@RequestParam MultipartFile file, Model model) throws IOException{
-
+//        model.addAttribute("sudoku", sudokuSolver.displayBoard(file));
         return "sudoku";
     }
 
