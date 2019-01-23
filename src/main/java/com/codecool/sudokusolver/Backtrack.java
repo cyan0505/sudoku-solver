@@ -28,6 +28,13 @@ public class Backtrack implements ISudokuSolver {
         this.fileParser = fileParser;
     }
 
+
+    public void displayBoard(int[][] board) throws IOException {
+
+    }
+
+
+
     public int[][] solve(MultipartFile file) throws IOException {
 
         int[][] toSolveBoard = fileParser.parseFile(file);

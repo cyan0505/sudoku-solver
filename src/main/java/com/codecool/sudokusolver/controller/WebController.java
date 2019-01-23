@@ -28,6 +28,13 @@ public class WebController {
     }
 
 
+    @PostMapping("/sudoku")
+    public String handleSudokuBoard(@RequestParam MultipartFile file, Model model) throws IOException{
+
+        return "sudoku";
+    }
+
+
 //    @PostMapping("/solver")
 //    public String handleUploadFile(@RequestParam MultipartFile file, Model model) throws IOException {
 //        model.addAttribute("sudoku", );
