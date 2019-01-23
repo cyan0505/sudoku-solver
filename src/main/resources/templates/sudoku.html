@@ -57,14 +57,15 @@
         </div>
 
         <!-- FILE -->
-        <form id="uploadForm" method="POST" action="/solver" enctype="multipart/form-data">
+        <form id="uploadForm" method="POST" action="/sudoku" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="exampleFormControlFile1">Input sudoku file here!</label>
                 <input type="file" name="file" class="form-control-file" id="exampleFormControlFile1">
             </div>
             <!-- UPLOAD -->
             <button type="submit" class="btn btn-primary btn-lg"><i class="fas fa-arrow-up"></i> Upload</button>
-
+        </form>
+        <form method="POST" action="/solver" class="my-5">
             <!-- BUTTON -->
             <button type="submit" class="btn btn-success btn-lg"><i class="fas fa-th"></i> Solve!</button>
         </form>
@@ -73,10 +74,12 @@
 
     <div class="flex-grow-1 align-items-center">
         <!-- SUDOKU -->
-        <table>
+        <table th:class="'b-table'">
 
-            <tr th:each="element : ${sudoku}">
-                <td th:each="value : ${element}" th:text="${value}" class="cell"></td>
+            <tr th:each="element : ${sudoku}" th:class="'cell b-bottom'">
+                <th:block th:each="value : ${element}" >
+                    <td th:text="${value}" th:class="'cell b-right'"></td>
+                </th:block>
             </tr>
 
         </table>

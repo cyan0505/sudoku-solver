@@ -21,23 +21,31 @@ public class Backtrack implements ISudokuSolver {
     private static final int SUBSECTION_SIZE = 3;
     private static final int BOARD_SIZE = 9;
     private FileParser fileParser;
+    private int[][] sudokuBoard;
 
 
     @Autowired
     public Backtrack(FileParser fileParser){
+        this.sudokuBoard = new int[9][9];
         this.fileParser = fileParser;
     }
 
 
-    public void displayBoard(int[][] board) throws IOException {
+    public int[][] getSudokuBoard(){
+        return this.sudokuBoard;
+    }
 
+
+    public int[][] uploadBoard(MultipartFile file) throws IOException {
+        this.sudokuBoard = fileParser.parseFile(file);
+        return fileParser.parseFile(file);
     }
 
 
 
-    public int[][] solve(MultipartFile file) throws IOException {
+    public int[][] solve() throws IOException {
 
-        int[][] toSolveBoard = fileParser.parseFile(file);
+        int[][] toSolveBoard = this.sudokuBoard;
 
         parseSudokuThroughAlgorithm(toSolveBoard);
 

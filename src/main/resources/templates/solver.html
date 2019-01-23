@@ -57,14 +57,15 @@
                 </div>
 
                 <!-- FILE -->
-                <form id="uploadForm" method="POST" action="/solver" enctype="multipart/form-data">
+                <form id="uploadForm" method="POST" action="/sudoku" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="exampleFormControlFile1">Input sudoku file here!</label>
                         <input type="file" name="file" class="form-control-file" id="exampleFormControlFile1">
                     </div>
                     <!-- UPLOAD -->
                     <button type="submit" class="btn btn-primary btn-lg"><i class="fas fa-arrow-up"></i> Upload</button>
-
+                </form>
+                <form method="POST" action="/solver" class="my-5">
                     <!-- BUTTON -->
                     <button type="submit" class="btn btn-success btn-lg"><i class="fas fa-th"></i> Solve!</button>
                 </form>
@@ -75,7 +76,7 @@
                 <!-- SUDOKU -->
 
 
-                <table>
+                <table th:class="'b-table'">
                     <tr>
                         <td class="cell">2</td>
                         <td class="cell"></td>
@@ -102,18 +103,18 @@
                         <td class="cell">8</td>
                         <td class="cell">4</td>
                     </tr>
-                    <tr>
-                        <td class="cell b-bottom"></td>
-                        <td class="cell b-bottom">3</td>
-                        <td class="cell b-right b-bottom"></td>
+                    <tr th:class="'b-bottom-row'">
+                        <td class="cell"></td>
+                        <td class="cell">3</td>
+                        <td class="cell b-right"></td>
 
-                        <td class="cell b-bottom">5</td>
-                        <td class="cell b-bottom"></td>
-                        <td class="cell b-right b-bottom"></td>
+                        <td class="cell">5</td>
+                        <td class="cell"></td>
+                        <td class="cell b-right"></td>
 
-                        <td class="cell b-bottom">2</td>
-                        <td class="cell b-bottom"></td>
-                        <td class="cell b-bottom">9</td>
+                        <td class="cell">2</td>
+                        <td class="cell"></td>
+                        <td class="cell">9</td>
                     </tr>
                     <tr>
                         <td class="cell"></td>
@@ -140,18 +141,18 @@
                         <td class="cell"></td>
                         <td class="cell"></td>
                     </tr>
-                    <tr>
-                        <td class="cell b-bottom">4</td>
-                        <td class="cell b-bottom"></td>
-                        <td class="cell b-right b-bottom">2</td>
+                    <tr th:class="'b-bottom-row'">
+                        <td class="cell">4</td>
+                        <td class="cell"></td>
+                        <td class="cell b-right">2</td>
 
-                        <td class="cell b-bottom">7</td>
-                        <td class="cell b-bottom"></td>
-                        <td class="cell b-right b-bottom">6</td>
+                        <td class="cell">7</td>
+                        <td class="cell"></td>
+                        <td class="cell b-right">6</td>
 
-                        <td class="cell b-bottom"></td>
-                        <td class="cell b-bottom"></td>
-                        <td class="cell b-bottom"></td>
+                        <td class="cell"></td>
+                        <td class="cell"></td>
+                        <td class="cell"></td>
                     </tr>
                     <tr>
                         <td class="cell">3</td>

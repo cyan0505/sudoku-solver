@@ -22,15 +22,15 @@ public class WebController {
 
 
     @PostMapping("/solver")
-    public String handleSolvedSudoku(@RequestParam MultipartFile file, Model model) throws IOException {
-        model.addAttribute("sudokuBoard", sudokuSolver.solve(file));
+    public String handleSolvedSudoku(Model model) throws IOException {
+        model.addAttribute("solvedSudoku", sudokuSolver.solve());
         return "result";
     }
 
 
-    @PostMapping("/solver")
+    @PostMapping("/sudoku")
     public String handleSudokuBoard(@RequestParam MultipartFile file, Model model) throws IOException{
-//        model.addAttribute("sudoku", sudokuSolver.displayBoard(file));
+        model.addAttribute("sudoku", sudokuSolver.uploadBoard(file));
         return "sudoku";
     }
 

@@ -1,6 +1,5 @@
 import com.codecool.sudokusolver.Backtrack;
 import com.codecool.sudokusolver.service.FileParser;
-import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,7 +20,7 @@ public class App {
             MultipartFile multipartFile = new MockMultipartFile("file", file.getName(), "text/plain", input);
 
             Backtrack solver = new Backtrack(parser);
-            solver.solve(multipartFile);
+            solver.solve();
 
         } catch (IOException e) {
             e.printStackTrace();
