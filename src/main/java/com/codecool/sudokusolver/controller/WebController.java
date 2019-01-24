@@ -14,6 +14,7 @@ import java.io.IOException;
 @Controller
 public class WebController {
     private ISudokuSolver sudokuSolver;
+    private String fileName;
 
     @Autowired
     public WebController(ISudokuSolver sudokuSolver) {
@@ -24,13 +25,15 @@ public class WebController {
     @PostMapping("/solver")
     public String handleSolvedSudoku(Model model) throws IOException {
         model.addAttribute("solvedSudoku", sudokuSolver.solve());
+        model.addAttribute("fileName", this.fileName);
+        model.addAttribute("time", sudokuSolver.elapsedTime());
         return "result";
     }
 
 
     @PostMapping("/sudoku")
     public String handleSudokuBoard(@RequestParam MultipartFile file, Model model) throws IOException{
-        String fileName = file.getOriginalFilename();
+        this.fileName = file.getOriginalFilename();
         model.addAttribute("sudoku", sudokuSolver.uploadBoard(file));
         model.addAttribute("fileName", fileName);
         return "sudoku";

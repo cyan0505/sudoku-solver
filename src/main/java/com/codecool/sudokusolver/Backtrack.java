@@ -26,7 +26,12 @@ public class Backtrack implements ISudokuSolver {
     private static boolean flagRow;
     private static boolean flagCol;
     private static boolean flagSubsquare;
-    private ExecutorService e = Executors.newSingleThreadExecutor();
+    private ExecutorService e = Executors.newFixedThreadPool(10);
+
+    private long startTime;
+    private long endTime;
+    public static long elapsedTime;
+    private final int TIME_DIVIDER = 1000000000;
 
 
     @Autowired
@@ -35,6 +40,9 @@ public class Backtrack implements ISudokuSolver {
         this.fileParser = fileParser;
     }
 
+    public long elapsedTime(){
+        return elapsedTime;
+    }
 
     public int[][] getSudokuBoard(){
         return this.sudokuBoard;
@@ -49,7 +57,7 @@ public class Backtrack implements ISudokuSolver {
 
 
     public int[][] solve() throws IOException {
-
+        this.startTime = System.currentTimeMillis();
         int[][] toSolveBoard = this.sudokuBoard;
 
         try {
@@ -58,6 +66,9 @@ public class Backtrack implements ISudokuSolver {
             e1.printStackTrace();
         }
 
+
+        this.endTime = System.currentTimeMillis();
+        this.elapsedTime = endTime - this.startTime;
         return toSolveBoard;
     }
 
