@@ -10,7 +10,7 @@
 2. Click Upload button.
 3. Click Solve button to solve sudoku.
 
-![](sudoku.gif)
+![](src/main/resources/static/sudoku.gif)
 
 
 ### Built with:
