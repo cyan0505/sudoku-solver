@@ -58,3 +58,10 @@ body {
     padding: 1rem 1rem;
 
 }
+
+/*IMAGE*/
+
+.image {
+    width: 600px;
+    height: 300px;
+}
