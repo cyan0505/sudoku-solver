@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.concurrent.*;
 import java.util.stream.IntStream;
 
 
@@ -22,6 +23,10 @@ public class Backtrack implements ISudokuSolver {
     private static final int BOARD_SIZE = 9;
     private FileParser fileParser;
     private int[][] sudokuBoard;
+    private static boolean flagRow;
+    private static boolean flagCol;
+    private static boolean flagSubsquare;
+    private ExecutorService e = Executors.newSingleThreadExecutor();
 
 
     @Autowired
@@ -47,12 +52,16 @@ public class Backtrack implements ISudokuSolver {
 
         int[][] toSolveBoard = this.sudokuBoard;
 
-        parseSudokuThroughAlgorithm(toSolveBoard);
+        try {
+            parseSudokuThroughAlgorithm(toSolveBoard);
+        } catch (ExecutionException | InterruptedException e1) {
+            e1.printStackTrace();
+        }
 
         return toSolveBoard;
     }
 
-    private boolean parseSudokuThroughAlgorithm(int[][] board) throws IOException {
+    private boolean parseSudokuThroughAlgorithm(int[][] board) throws ExecutionException, InterruptedException {
         for (int row = BOARD_START_INDEX; row < BOARD_SIZE; row++) {
 
             for (int column = BOARD_START_INDEX; column < BOARD_SIZE; column++) {
@@ -71,11 +80,23 @@ public class Backtrack implements ISudokuSolver {
         return true;
     }
 
-    private boolean isValid(int[][] board, int row, int column) {
+    private boolean isValid(int[][] board, int row, int column) throws ExecutionException, InterruptedException {
 
-        return (rowConstraint(board, row)
-                && columnConstraint(board, column)
-                && subsectionConstraint(board, row, column));
+        Runnable r1 = () -> flagRow = rowConstraint(board, row);
+
+        Runnable r2 = () -> flagCol = columnConstraint(board, column);
+
+        Runnable r3 = () -> flagSubsquare = subsectionConstraint(board, row, column);
+
+        final Future<?> f1 = e.submit(r1);
+        final Future<?> f2 = e.submit(r2);
+        final Future<?> f3 = e.submit(r3);
+
+            f1.get();
+            f2.get();
+            f3.get();
+
+        return flagRow && flagCol && flagSubsquare;
     }
 
     private boolean rowConstraint(int[][] board, int row) {
