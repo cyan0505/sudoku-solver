@@ -78,7 +78,8 @@
 
             <tr th:each="element : ${sudoku}" th:class="'cell b-bottom'">
                 <th:block th:each="value : ${element}" >
-                    <td th:text="${value}" th:class="'cell b-right'"></td>
+                    <td th:if="${value != 0}" th:text="${value}" th:class="'cell b-right'"></td>
+                    <td th:if="${value == 0}" th:text="${' '}" th:class="'cell b-right'"></td>
                 </th:block>
             </tr>
 
