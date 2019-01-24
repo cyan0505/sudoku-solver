@@ -12,8 +12,25 @@ $(document).ready(
     });
 
 $(document).ready(function () {
-    $("#yourFormId").submit(function () {
-        $("button:submit").attr("disabled", true);
+    $("#uploadForm").submit(function () {
+        $('#uploadBtn').attr("disabled", true);
         return true;
     });
 });
+
+
+// $(document).ready(function () {
+//
+//     $("#uploadForm").submit(function (e) {
+//
+//         //stop submitting the form to see the disabled button effect
+//         e.preventDefault();
+//
+//         //disable the submit button
+//         $("#btnSubmit").attr("disabled", true);
+//
+//
+//         return true;
+//
+//     });
+// });
