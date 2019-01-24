@@ -60,7 +60,7 @@
                 <form id="uploadForm" method="POST" action="/sudoku" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="exampleFormControlFile1">Input sudoku file here!</label>
-                        <input type="file" name="file" class="form-control-file" id="exampleFormControlFile1">
+                        <input type="file" name="file" class="form-control-file" id="exampleFormControlFile1" onchange="fileValidation()">
                     </div>
                     <!-- UPLOAD -->
                     <button id="uploadBtn" type="submit" class="btn btn-primary btn-lg" disabled><i class="fas fa-arrow-up"></i> Upload</button>
