@@ -6,7 +6,11 @@
 1.
 
 ### Using the API
+1. Choose file in txt format with sudoku to solve.
+2. Click Upload button.
+3. Click Solve button to solve sudoku.
 
+![](sudoku.gif)
 
 
 ### Built with:
