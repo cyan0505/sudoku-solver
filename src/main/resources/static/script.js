@@ -20,3 +20,8 @@ function fileValidation() {
         return false;
     }
 }
+
+function download(d) {
+    if (d == 'Select document') return;
+    window.location = 'http://example.com' + d;
+}

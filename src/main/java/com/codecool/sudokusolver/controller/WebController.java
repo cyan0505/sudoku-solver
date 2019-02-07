@@ -40,13 +40,6 @@ public class WebController {
     }
 
 
-//    @PostMapping("/solver")
-//    public String handleUploadFile(@RequestParam MultipartFile file, Model model) throws IOException {
-//        model.addAttribute("sudoku", );
-//        return "sudoku";
-//    }
-
-
     @GetMapping("/home")
     public String handleHome() {
         return "index";
