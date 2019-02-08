@@ -59,15 +59,20 @@
 
                     <div class="examples">
                         <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Preference</label>
-                        <select name="download" class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" >
+                        <!--<select name="download" class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" >-->
+                            <!--<option selected>Choose...</option>-->
+                            <!--<option value="grid1.txt">Grid One</option>-->
+                            <!--<option value="grid2.txt">Grid Two</option>-->
+                            <!--<option value="grid3.txt">Grid Three</option>-->
+                        <!--</select>-->
+
+
+                        <select name="download" class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" onchange="this.form.submit()">
                             <option selected>Choose...</option>
                             <option value="grid1.txt">Grid One</option>
-                            <option value="grid2.txt">Grid Two</option>
-                            <option value="grid3.txt">Grid Three</option>
-
-
-
                         </select>
+
+
                     </div>
 
                     <div class="form-group">

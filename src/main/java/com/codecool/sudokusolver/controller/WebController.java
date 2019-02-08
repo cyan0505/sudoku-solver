@@ -39,11 +39,6 @@ public class WebController {
         return "sudoku";
     }
 
-
-
-
-
-
     @GetMapping("/home")
     public String handleHome() {
         return "index";
