@@ -31,13 +31,32 @@ public class WebController {
     }
 
 
+
     @PostMapping("/sudoku")
-    public String handleSudokuBoard(@RequestParam MultipartFile file, Model model) throws IOException{
+    public String handleSudokuBoard(@RequestParam MultipartFile file, Model model) throws IOException {
         this.fileName = file.getOriginalFilename();
         model.addAttribute("sudoku", sudokuSolver.uploadBoard(file));
         model.addAttribute("fileName", fileName);
         return "sudoku";
     }
+
+
+    @PostMapping("/example")
+    public String handleExampleSudokuBoard(@RequestParam("grid") String grid, Model model) throws IOException {
+
+
+        if(grid.equals("grid1")) {
+
+        }
+
+        MultipartFile file = null;
+        this.fileName = file.getOriginalFilename();
+        model.addAttribute("sudoku", sudokuSolver.uploadBoard(file));
+        model.addAttribute("fileName", fileName);
+        return "example";
+    }
+
+
 
     @GetMapping("/home")
     public String handleHome() {

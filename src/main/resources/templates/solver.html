@@ -54,27 +54,30 @@
                     <h4>-----------</h4>
                 </div>
 
-                <!-- FILE -->
-                <form id="uploadForm" method="POST" action="/sudoku" enctype="multipart/form-data">
+                <!--EXAMPLE GRID-->
+                <form method="POST" action="/example" class="py-5">
 
                     <div class="examples">
-                        <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Preference</label>
+                        <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Sudoku examples:</label>
                         <!--<select name="download" class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" >-->
-                            <!--<option selected>Choose...</option>-->
-                            <!--<option value="grid1.txt">Grid One</option>-->
-                            <!--<option value="grid2.txt">Grid Two</option>-->
-                            <!--<option value="grid3.txt">Grid Three</option>-->
+                        <!--<option selected>Choose...</option>-->
+                        <!--<option value="grid1.txt">Grid One</option>-->
+                        <!--<option value="grid2.txt">Grid Two</option>-->
+                        <!--<option value="grid3.txt">Grid Three</option>-->
                         <!--</select>-->
 
 
-                        <select name="download" class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" onchange="this.form.submit()">
+                        <select name="grid" class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" onchange="this.form.submit()">
                             <option selected>Choose...</option>
-                            <option value="grid1.txt">Grid One</option>
+                            <option value="grid1">Grid One</option>
                         </select>
-
-
                     </div>
 
+                </form>
+
+
+                <!-- FILE -->
+                <form id="uploadForm" method="POST" action="/sudoku" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="exampleFormControlFile1">Input your sudoku file here!</label>
                         <input type="file" name="file" class="form-control-file" id="exampleFormControlFile1" onchange="fileValidation()">
