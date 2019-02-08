@@ -3,7 +3,8 @@
 body {
     background-image: url("game.jpg");
     background-size: cover;
-    background-position: center;   
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 

@@ -23,5 +23,5 @@ function fileValidation() {
 
 function download(d) {
     if (d == 'Select document') return;
-    window.location = 'http://example.com' + d;
+    window.location = '/home/szwajcii/Desktop/Java Advanced/TW_5/sudoku-solver/src/main/resources/sudoku/' + d;
 }
