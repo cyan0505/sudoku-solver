@@ -26,12 +26,11 @@ public class Backtrack implements ISudokuSolver {
     private static boolean flagRow;
     private static boolean flagCol;
     private static boolean flagSubsquare;
-    private ExecutorService e = Executors.newFixedThreadPool(10);
+    private ExecutorService e = Executors.newFixedThreadPool(1);
 
     private long startTime;
     private long endTime;
     public static long elapsedTime;
-    private final int TIME_DIVIDER = 1000000000;
 
 
     @Autowired
@@ -93,21 +92,21 @@ public class Backtrack implements ISudokuSolver {
 
     private boolean isValid(int[][] board, int row, int column) throws ExecutionException, InterruptedException {
 
-        Runnable r1 = () -> flagRow = rowConstraint(board, row);
+//        Runnable r1 = () -> flagRow = rowConstraint(board, row);
+//
+//        Runnable r2 = () -> flagCol = columnConstraint(board, column);
+//
+//        Runnable r3 = () -> flagSubsquare = subsectionConstraint(board, row, column);
+//
+//        final Future<?> f1 = e.submit(r1);
+//        final Future<?> f2 = e.submit(r2);
+//        final Future<?> f3 = e.submit(r3);
+//
+//            f1.get();
+//            f2.get();
+//            f3.get();
 
-        Runnable r2 = () -> flagCol = columnConstraint(board, column);
-
-        Runnable r3 = () -> flagSubsquare = subsectionConstraint(board, row, column);
-
-        final Future<?> f1 = e.submit(r1);
-        final Future<?> f2 = e.submit(r2);
-        final Future<?> f3 = e.submit(r3);
-
-            f1.get();
-            f2.get();
-            f3.get();
-
-        return flagRow && flagCol && flagSubsquare;
+        return rowConstraint(board, row) && columnConstraint(board, column) && subsectionConstraint(board, row, column);
     }
 
     private boolean rowConstraint(int[][] board, int row) {
