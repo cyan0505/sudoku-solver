@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
 
 @Controller
@@ -43,16 +44,22 @@ public class WebController {
 
     @PostMapping("/example")
     public String handleExampleSudokuBoard(@RequestParam("grid") String grid, Model model) throws IOException {
-
+        File file = null;
 
         if(grid.equals("grid1")) {
-
+            file = new File("src/main/resources/sudoku/grid1.txt");
+        } else if(grid.equals("grid2")) {
+            file = new File("src/main/resources/sudoku/grid2.txt");
+        } else if(grid.equals("grid3")) {
+            file = new File("src/main/resources/sudoku/grid3.txt");
+        } else if(grid.equals("grid4")) {
+            file = new File("src/main/resources/sudoku/grid4.txt");
+        } else if(grid.equals("worlds_hardest_sudoku")) {
+            file = new File("src/main/resources/sudoku/worlds_hardest_sudoku.txt");
         }
 
-        MultipartFile file = null;
-        this.fileName = file.getOriginalFilename();
-        model.addAttribute("sudoku", sudokuSolver.uploadBoard(file));
-        model.addAttribute("fileName", fileName);
+        model.addAttribute("sudoku", sudokuSolver.uploadExampleBoard(file));
+//        model.addAttribute("fileName", fileName);
         return "example";
     }
 

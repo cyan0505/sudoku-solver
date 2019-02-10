@@ -32,6 +32,28 @@ public class FileParser {
     }
 
 
+    public int[][] parseExampleFile(File file) throws IOException {
+
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+        List<String> lines = new ArrayList<>();
+        int counter = 0;
+        int[][] board = new int[9][9];
+        String line = null;
+
+        while((line = reader.readLine()) != null) {
+
+            String[] row = line.split(",");
+            int[] sudokuRow = Arrays.asList(row).stream().mapToInt(Integer::parseInt).toArray();
+            System.arraycopy(sudokuRow, 0, board[counter], 0, sudokuRow.length);
+            counter++;
+        }
+        reader.close();
+        return board;
+
+    }
+
+
+
     private File convertFile(MultipartFile file) throws IOException{
         File convFile = new File(file.getOriginalFilename());
         convFile.createNewFile();

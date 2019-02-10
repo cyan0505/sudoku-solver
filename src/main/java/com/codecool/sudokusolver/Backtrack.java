@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.*;
 import java.util.stream.IntStream;
@@ -52,6 +53,13 @@ public class Backtrack implements ISudokuSolver {
         this.sudokuBoard = fileParser.parseFile(file);
         return fileParser.parseFile(file);
     }
+
+    @Override
+    public int[][] uploadExampleBoard(File file) throws IOException {
+        this.sudokuBoard = fileParser.parseExampleFile(file);
+        return fileParser.parseExampleFile(file);
+    }
+
 
 
 
