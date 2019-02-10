@@ -65,50 +65,12 @@
     <div class="d-flex order-0 order-md-1 justify-content-center">
         <!-- SUDOKU -->
 
-        <form method="POST" action="/userGrid">
+        <form:form method="POST" action="/userGrid" modelAttribute="userGrid">
 
             <table th:class="'b-table'" name="userGrid">
+                <c:forEach items="${userGrid}">
                 <tr>
-                    <td class="cell"><input th:class="'cell-input'" type="text" name="userGrid0.0"></td>
-                    <td class="cell"></td>
-                    <td class="cell b-right"></td>
-
-                    <td class="cell"></td>
-                    <td class="cell"></td>
-                    <td class="cell b-right"></td>
-
-                    <td class="cell"></td>
-                    <td class="cell"></td>
-                    <td class="cell"></td>
-                </tr>
-                <tr>
-                    <td class="cell"></td>
-                    <td class="cell"></td>
-                    <td class="cell b-right"></td>
-
-                    <td class="cell"></td>
-                    <td class="cell"></td>
-                    <td class="cell b-right"></td>
-
-                    <td class="cell"></td>
-                    <td class="cell"></td>
-                    <td class="cell"></td>
-                </tr>
-                <tr th:class="'b-bottom-row'">
-                    <td class="cell"></td>
-                    <td class="cell"></td>
-                    <td class="cell b-right"></td>
-
-                    <td class="cell"></td>
-                    <td class="cell"></td>
-                    <td class="cell b-right"></td>
-
-                    <td class="cell"></td>
-                    <td class="cell"></td>
-                    <td class="cell"></td>
-                </tr>
-                <tr>
-                    <td class="cell"></td>
+                    <td class="cell"><input th:class="'cell-input'" type="text" name="userGrid[${0}][${0}]"></td>
                     <td class="cell"></td>
                     <td class="cell b-right"></td>
 
@@ -172,6 +134,19 @@
                     <td class="cell"></td>
                     <td class="cell"></td>
                 </tr>
+                <tr th:class="'b-bottom-row'">
+                    <td class="cell"></td>
+                    <td class="cell"></td>
+                    <td class="cell b-right"></td>
+
+                    <td class="cell"></td>
+                    <td class="cell"></td>
+                    <td class="cell b-right"></td>
+
+                    <td class="cell"></td>
+                    <td class="cell"></td>
+                    <td class="cell"></td>
+                </tr>
                 <tr>
                     <td class="cell"></td>
                     <td class="cell"></td>
@@ -185,11 +160,38 @@
                     <td class="cell"></td>
                     <td class="cell"></td>
                 </tr>
+                <tr>
+                    <td class="cell"></td>
+                    <td class="cell"></td>
+                    <td class="cell b-right"></td>
+
+                    <td class="cell"></td>
+                    <td class="cell"></td>
+                    <td class="cell b-right"></td>
+
+                    <td class="cell"></td>
+                    <td class="cell"></td>
+                    <td class="cell"></td>
+                </tr>
+                <tr>
+                    <td class="cell"></td>
+                    <td class="cell"></td>
+                    <td class="cell b-right"></td>
+
+                    <td class="cell"></td>
+                    <td class="cell"></td>
+                    <td class="cell b-right"></td>
+
+                    <td class="cell"></td>
+                    <td class="cell"></td>
+                    <td class="cell"></td>
+                </tr>
+            </c:forEach>
             </table>
 
-            <button type="submit" class="btn btn-success btn-lg"><i class="fas fa-th"></i> Solve!</button>
+            <input type="submit" class="btn btn-success btn-lg"><i class="fas fa-th"></i> Solve!</input>
 
-        </form>
+        </form:form>
     </div>
 
 

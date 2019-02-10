@@ -44,7 +44,7 @@ public class WebController {
     }
 
     @PostMapping("/userGrid")
-    public String handleManualGrid(@RequestParam("userGrid") String[][] userGrid , Model model) throws IOException {
+    public String handleManualGrid(@ModelAttribute("userGrid") String[][] userGrid , Model model) throws IOException {
 
         System.out.println("USER GRID");
 
