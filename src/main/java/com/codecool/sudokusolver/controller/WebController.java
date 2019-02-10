@@ -16,6 +16,7 @@ import java.io.IOException;
 public class WebController {
     private ISudokuSolver sudokuSolver;
     private String fileName;
+    private String[][] manualGrid;
 
     @Autowired
     public WebController(ISudokuSolver sudokuSolver) {
@@ -66,10 +67,11 @@ public class WebController {
     }
 
     @PostMapping("")
-    public String handleManualGrid() {
+    public String handleManualGrid(Model model) throws IOException {
 
-
-
+        model.addAttribute("solvedSudoku", sudokuSolver.solve());
+        model.addAttribute("fileName", this.fileName);
+        model.addAttribute("time", sudokuSolver.elapsedTime());
         return "result";
     }
 
@@ -87,6 +89,11 @@ public class WebController {
     @GetMapping("/about")
     public String handleAbout() {
         return "about";
+    }
+
+    @GetMapping("/grid")
+    public String handleUserGrid() {
+        return "grid";
     }
 
 

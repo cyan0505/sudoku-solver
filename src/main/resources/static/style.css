@@ -4,6 +4,12 @@ body {
     font-family: "Nunito", sans-serif;
 }
 
+.cell-input {
+    border: none;
+    width: 100%;
+    text-align: center;
+}
+
 /* CELL */
 .cell {
 
