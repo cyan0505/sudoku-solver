@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -42,6 +43,17 @@ public class WebController {
         return "sudoku";
     }
 
+    @PostMapping("/userGrid")
+    public String handleManualGrid(@RequestParam("userGrid") String[][] userGrid , Model model) throws IOException {
+
+        System.out.println("USER GRID");
+
+        sudokuSolver.generateUserGrid(userGrid);
+        model.addAttribute("solvedSudoku", sudokuSolver.solve());
+        model.addAttribute("time", sudokuSolver.elapsedTime());
+        return "result";
+    }
+
 
     @PostMapping("/example")
     public String handleExampleSudokuBoard(@RequestParam("grid") String grid, Model model) throws IOException {
@@ -64,15 +76,6 @@ public class WebController {
         model.addAttribute("sudoku", sudokuSolver.uploadExampleBoard(file));
         model.addAttribute("fileName", fileName);
         return "example";
-    }
-
-    @PostMapping("")
-    public String handleManualGrid(Model model) throws IOException {
-
-        model.addAttribute("solvedSudoku", sudokuSolver.solve());
-        model.addAttribute("fileName", this.fileName);
-        model.addAttribute("time", sudokuSolver.elapsedTime());
-        return "result";
     }
 
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/xhtml">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -65,11 +65,11 @@
     <div class="d-flex order-0 order-md-1 justify-content-center">
         <!-- SUDOKU -->
 
-        <form method="POST" action="">
+        <form method="POST" action="/userGrid">
 
-            <table th:class="'b-table'">
+            <table th:class="'b-table'" name="userGrid">
                 <tr>
-                    <td class="cell"><input th:class="'cell-input'" type="text"></td>
+                    <td class="cell"><input th:class="'cell-input'" type="text" name="userGrid0.0"></td>
                     <td class="cell"></td>
                     <td class="cell b-right"></td>
 
@@ -186,6 +186,9 @@
                     <td class="cell"></td>
                 </tr>
             </table>
+
+            <button type="submit" class="btn btn-success btn-lg"><i class="fas fa-th"></i> Solve!</button>
+
         </form>
     </div>
 

@@ -48,7 +48,6 @@ public class Backtrack implements ISudokuSolver {
         return this.sudokuBoard;
     }
 
-
     public int[][] uploadBoard(MultipartFile file) throws IOException {
         this.sudokuBoard = fileParser.parseFile(file);
         return fileParser.parseFile(file);
@@ -60,7 +59,20 @@ public class Backtrack implements ISudokuSolver {
         return fileParser.parseExampleFile(file);
     }
 
+    @Override
+    public void generateUserGrid(String[][] userGrid) throws IOException {
+        int[][] userGridToSolve = this.sudokuBoard;
 
+        for(int i = 0; i < userGrid.length; i++){
+            for(int k = 0; k < userGrid[i].length; k++) {
+                if(userGrid[i][k].equals(" ")){
+                    userGridToSolve[i][k] = 0;
+                } else {
+                    userGridToSolve[i][k] = Integer.valueOf(userGrid[i][k]);
+                }
+            }
+        }
+    }
 
 
     public int[][] solve() throws IOException {
