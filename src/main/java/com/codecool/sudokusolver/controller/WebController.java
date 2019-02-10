@@ -46,6 +46,8 @@ public class WebController {
     public String handleExampleSudokuBoard(@RequestParam("grid") String grid, Model model) throws IOException {
         File file = null;
 
+        this.fileName = grid;
+
         if(grid.equals("grid1")) {
             file = new File("src/main/resources/sudoku/grid1.txt");
         } else if(grid.equals("grid2")) {
@@ -59,7 +61,7 @@ public class WebController {
         }
 
         model.addAttribute("sudoku", sudokuSolver.uploadExampleBoard(file));
-//        model.addAttribute("fileName", fileName);
+        model.addAttribute("fileName", fileName);
         return "example";
     }
 
