@@ -65,6 +65,13 @@ public class WebController {
         return "example";
     }
 
+    @PostMapping("")
+    public String handleManualGrid() {
+
+
+
+        return "result";
+    }
 
 
     @GetMapping("/home")
