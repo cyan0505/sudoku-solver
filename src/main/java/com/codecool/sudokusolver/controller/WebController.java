@@ -48,15 +48,15 @@ public class WebController {
 
         this.fileName = grid;
 
-        if(grid.equals("grid1")) {
+        if(grid.equals("Grid one")) {
             file = new File("src/main/resources/sudoku/grid1.txt");
-        } else if(grid.equals("grid2")) {
+        } else if(grid.equals("Grid two")) {
             file = new File("src/main/resources/sudoku/grid2.txt");
-        } else if(grid.equals("grid3")) {
+        } else if(grid.equals("Grid three")) {
             file = new File("src/main/resources/sudoku/grid3.txt");
-        } else if(grid.equals("grid4")) {
+        } else if(grid.equals("Grid four")) {
             file = new File("src/main/resources/sudoku/grid4.txt");
-        } else if(grid.equals("worlds_hardest_sudoku")) {
+        } else if(grid.equals("Worlds hardest sudoku")) {
             file = new File("src/main/resources/sudoku/worlds_hardest_sudoku.txt");
         }
 
