@@ -54,6 +54,23 @@
             <h4 th:text="${time} + ' ms'"></h4>
         </div>
 
+        <!--EXAMPLE GRID-->
+        <form method="POST" action="/example" class="py-5">
+
+            <div class="examples">
+                <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Sudoku examples:</label>
+                <select name="grid" class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" onchange="this.form.submit()">
+                    <option selected>Choose...</option>
+                    <option value="Grid one">Grid One</option>
+                    <option value="Grid two">Grid Two</option>
+                    <option value="Grid three">Grid Three</option>
+                    <option value="Grid four">Grid Four</option>
+                    <option value="Worlds hardest sudoku">World's hardest sudoku</option>
+                </select>
+            </div>
+
+        </form>
+
         <!-- FILE -->
         <form id="uploadForm" method="POST" action="/sudoku" enctype="multipart/form-data">
             <div class="form-group">
