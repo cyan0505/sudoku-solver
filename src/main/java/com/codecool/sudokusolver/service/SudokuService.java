@@ -1,6 +1,5 @@
 package com.codecool.sudokusolver.service;
 
-import com.codecool.sudokusolver.model.Sudoku;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,11 +17,11 @@ public class SudokuService {
     }
 
 
-    public int[][] solveSudoku(MultipartFile multipartFile) throws IOException {
+    public int[][] solveSudoku(MultipartFile multipartFile) throws IOException, InterruptedException {
 
-        Sudoku sudoku = new Sudoku(fileParser.parseFile(multipartFile));
+//        Sudoku sudoku = new Sudoku(fileParser.parseFile(multipartFile));
 
-        sudoku.solve();
+//        sudoku.solve();
 
         return null;
 
