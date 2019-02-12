@@ -11,6 +11,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class WebController {
@@ -44,17 +46,17 @@ public class WebController {
     }
 
     @PostMapping("/userGrid")
-    public String handleManualGrid(@RequestBody String jsonGrid, Model model) throws IOException {
+    public String handleManualGrid(SudokuCellList cell, Model model) throws IOException {
 
 
 
         System.out.println("USER GRID");
-        System.out.println(jsonGrid);
+        System.out.println(cell);
 
-        Gson g = new Gson();
-        SudokuCellList sudokuCells = g.fromJson(jsonGrid, SudokuCellList.class);
+//        Gson g = new Gson();
+//        SudokuCellList sudokuCells = g.fromJson(jsonGrid, SudokuCellList.class);
 
-        System.out.println(sudokuCells.getSudokuCells());
+//        System.out.println(sudokuCells.getSudokuCells());
 
 //        sudokuSolver.generateUserGrid(userGrid);
         model.addAttribute("solvedSudoku", sudokuSolver.solve());
