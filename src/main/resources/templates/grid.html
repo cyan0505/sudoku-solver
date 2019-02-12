@@ -65,10 +65,9 @@
     <div class="d-flex order-0 order-md-1 justify-content-center">
         <!-- SUDOKU -->
 
-        <form:form method="POST" action="/userGrid" modelAttribute="userGrid">
+        <form method="POST" action="/userGrid">
 
             <table th:class="'b-table'" name="userGrid">
-                <c:forEach items="${userGrid}">
                 <tr>
                     <td class="cell"><input th:class="'cell-input'" type="text" name="userGrid[${0}][${0}]"></td>
                     <td class="cell"></td>
@@ -186,12 +185,11 @@
                     <td class="cell"></td>
                     <td class="cell"></td>
                 </tr>
-            </c:forEach>
             </table>
 
             <input type="submit" class="btn btn-success btn-lg"><i class="fas fa-th"></i> Solve!</input>
 
-        </form:form>
+        </form>
     </div>
 
 
