@@ -3,57 +3,76 @@ package com.codecool.sudokusolver.model;
 import lombok.Data;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-
 
 @Data
 public class Cell {
-
-    private final int column;
     private final int row;
-    private int value;
-    private int square;
-    private List<Integer> possibleResults;
+    private final int column;
+    private final int square;
+    private volatile int value;
+    private volatile List<Integer> possibleValues;
 
-
-    public Cell(int column, int row, int value) {
-        this.column = column;
+    public Cell(int row, int column, int value) {
         this.row = row;
+        this.column = column;
+        this.square = setSquare(row, column);
         this.value = value;
-        this.possibleResults = new ArrayList<>();
-        setSquare(row, column);
-    }
-
-
-    public void addValue(int value){
-        this.possibleResults.add(value);
-    }
-
-
-    private void setSquare(int row, int column) {
-
-        if(row <= 3 && column <= 3){
-            this.square = 1;
-        } else if (row >= 1 && row <= 3 && column >= 4 && column <= 6){
-            this.square = 2;
-        } else if (row >= 1 && row <= 3 && column >= 7) {
-            this.square = 3;
-        } else if (row >= 4 && row <= 6 && column >= 1 && column <= 3) {
-            this.square = 4;
-        } else if (row >= 4 && row <= 6 && column >= 4 && column <= 6) {
-            this.square = 5;
-        } else if (row >= 4 && row <= 6 && column >= 7) {
-            this.square = 6;
-        } else if (row >= 7 && column <= 3) {
-            this.square = 7;
-        } else if (row >= 7 && column >= 4 && column <= 6) {
-            this.square = 8;
-        } else if ( row >= 7 && column >= 7) {
-            this.square = 9;
+        if (value == 0) {
+            this.possibleValues = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
+        } else {
+            this.possibleValues = new ArrayList<>();
         }
-
     }
 
+    public Cell() {
+        this.row = 1;
+        this.column = 1;
+        this.square = setSquare(row, column);
+        this.value = 0;
+        this.possibleValues = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
+    }
 
+    public Cell(Cell cell) {
+        this.row = cell.getRow();
+        this.column = cell.getColumn();
+        this.square = cell.getSquare();
+        this.value = cell.getValue();
+        this.possibleValues = new ArrayList<>(cell.getPossibleValues());
+    }
 
+    public void setValue(int value) {
+        this.value = value;
+        this.possibleValues.clear();
+    }
+
+    public void removeValue(int value) {
+        if (possibleValues.contains(value)) {
+            this.possibleValues.remove(Integer.valueOf(value));
+        }
+    }
+
+    static int setSquare(int row, int column) {
+        if (row >= 0 && row <= 2 && column >= 0 && column <= 2) {
+            return 0;
+        } else if (row >= 0 && row <= 2 && column >= 3 && column <= 5) {
+            return 1;
+        } else if (row >= 0 && row <= 2 && column >= 6 && column <= 8) {
+            return 2;
+        } else if (row >= 3 && row <= 5 && column >= 0 && column <= 2) {
+            return 3;
+        } else if (row >= 3 && row <= 5 && column >= 3 && column <= 5) {
+            return 4;
+        } else if (row >= 3 && row <= 5 && column >= 6 && column <= 8) {
+            return 5;
+        } else if (row >= 6 && row <= 8 && column >= 0 && column <= 2) {
+            return 6;
+        } else if (row >= 6 && row <= 8 && column >= 3 && column <= 5) {
+            return 7;
+        } else if (row >= 6 && row <= 8 && column >= 6 && column <= 8) {
+            return 8;
+        }
+        return 0;
+    }
 }
