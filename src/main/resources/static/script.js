@@ -21,7 +21,14 @@ function fileValidation() {
     }
 }
 
-function download(d) {
-    if (d == 'Select document') return;
-    window.location = '/home/szwajcii/Desktop/Java Advanced/TW_5/sudoku-solver/src/main/resources/sudoku/' + d;
-}
+
+// $(function() {
+//     $("#btnSolve").bind("click", function() {
+//         console.log("dupa");
+//         var userGridJSON = $("#userGrid").find('input').serializeArray();
+//         console.log(userGridJSON);
+//         alert(JSON.stringify(userGridJSON));
+//     });
+// });
+
+

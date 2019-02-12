@@ -1,13 +1,12 @@
 package com.codecool.sudokusolver.controller;
 
+import com.codecool.sudokusolver.model.SudokuCellList;
 import com.codecool.sudokusolver.service.ISudokuSolver;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -18,6 +17,7 @@ public class WebController {
     private ISudokuSolver sudokuSolver;
     private String fileName;
     private String[][] manualGrid;
+    private String[] userGrid;
 
     @Autowired
     public WebController(ISudokuSolver sudokuSolver) {
@@ -44,15 +44,25 @@ public class WebController {
     }
 
     @PostMapping("/userGrid")
-    public String handleManualGrid(@ModelAttribute("userGrid") String[][] userGrid , Model model) throws IOException {
+    public String handleManualGrid(@RequestBody String jsonGrid, Model model) throws IOException {
+
+
 
         System.out.println("USER GRID");
+        System.out.println(jsonGrid);
 
-        sudokuSolver.generateUserGrid(userGrid);
+        Gson g = new Gson();
+        SudokuCellList sudokuCells = g.fromJson(jsonGrid, SudokuCellList.class);
+
+        System.out.println(sudokuCells.getSudokuCells());
+
+//        sudokuSolver.generateUserGrid(userGrid);
         model.addAttribute("solvedSudoku", sudokuSolver.solve());
         model.addAttribute("time", sudokuSolver.elapsedTime());
         return "result";
     }
+
+
 
 
     @PostMapping("/example")
