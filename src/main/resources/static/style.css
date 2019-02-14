@@ -86,3 +86,13 @@ body {
     width: 600px;
     height: 300px;
 }
+
+/*USER SUDOKU*/
+
+.btn-user-sudoku {
+    border: 2px solid rgb(40, 167, 69);
+    border-radius: 30px;
+    text-align: center;
+    color: white;
+;
+}
