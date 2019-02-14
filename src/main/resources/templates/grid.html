@@ -69,8 +69,8 @@
 
             <table th:class="'b-table'" name="userGrid" id="userGrid">
                 <tr>
-                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell1" name="cell1" value=""></td>
-                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell2" name="cell" value=""></td>
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell1" name="cell1" value="" onkeyup="enterNumber()"></td>
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell2" name="cell" value="" onkeyup="enterNumber()"></td>
                     <td class="cell b-right"><input th:class="'cell-input'" type="text" id="cell3" name="cell3" value=""></td>
 
                     <td class="cell"><input th:class="'cell-input'" type="text" id="cell4" name="cell" value=""></td>
@@ -250,6 +250,20 @@
 
     }
 
+
+    $(":input").keyup(function(){
+        var input = $(this).val();
+
+        var inputID = input.id;
+        var regex = new RegExp("^[1-9]$");
+        if(regex.test(input) || input == "") {
+
+        }else {
+            alert("Please enter only number in range 1 - 9.");
+            $(this).val(input.substring(0,input.length-1));
+
+        }
+    });
 
 
 </script>
