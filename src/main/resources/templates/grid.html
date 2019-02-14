@@ -222,19 +222,11 @@
         var sudokuCellList = [];
 
         for(var i = 1; i <= 81; i++) {
+
             var cell = document.getElementById("cell" + i);
-
-
             var sudokuCell = new SudokuCell(cell.id, cell.value);
             sudokuCellList.push(sudokuCell);
         }
-
-        // var userGridJSON = $("#userGrid").find('input').serializeArray();
-        // console.log(userGridJSON);
-        // alert(JSON.stringify(userGridJSON));
-        // for(var k = 0; k < sudokuCellList.length; k++){
-        //     console.log(sudokuCellList[k]);
-        // }
 
         var httpRequest = new XMLHttpRequest();
 
@@ -243,8 +235,9 @@
                 $("html").html(httpRequest.responseText);
             }
         };
+
         var json = "{\"sudokuCells\": " + JSON.stringify(sudokuCellList) + "}";
-        console.log(json);
+
         httpRequest.open('POST', '/userGrid');
         httpRequest.send(json);
     }

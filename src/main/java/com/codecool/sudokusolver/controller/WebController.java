@@ -51,21 +51,13 @@ public class WebController {
 
         Gson g = new Gson();
         String json = request.getBody();
-        System.out.println("JSON :" + json);
         SudokuCellList sudokuCells = g.fromJson(json, SudokuCellList.class);
-        System.out.println("\n\nSudoku: " + sudokuCells);
-
 
         String[][] userGrid = sudokuSolver.getUserGrid(sudokuCells);
-
-        for(int i = 0; i < userGrid.length; i++){
-            System.out.println(Arrays.toString(userGrid[i]));
-        }
 
         sudokuSolver.generateUserGrid(userGrid);
         model.addAttribute("solvedSudoku", sudokuSolver.solve());
         model.addAttribute("time", sudokuSolver.elapsedTime());
-        System.out.println("WESZLO!!!!");
         return "result";
     }
 

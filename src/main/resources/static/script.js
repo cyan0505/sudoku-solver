@@ -22,13 +22,3 @@ function fileValidation() {
 }
 
 
-// $(function() {
-//     $("#btnSolve").bind("click", function() {
-//         console.log("dupa");
-//         var userGridJSON = $("#userGrid").find('input').serializeArray();
-//         console.log(userGridJSON);
-//         alert(JSON.stringify(userGridJSON));
-//     });
-// });
-
-
