@@ -17,7 +17,6 @@ public class SudokuCell {
     public void setId(String id) {
         this.id = id;
     }
-
     public String getValue() {
         return value;
     }

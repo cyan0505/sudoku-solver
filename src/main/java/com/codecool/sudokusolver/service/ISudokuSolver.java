@@ -1,6 +1,5 @@
 package com.codecool.sudokusolver.service;
 
-import com.codecool.sudokusolver.model.SudokuCellList;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;

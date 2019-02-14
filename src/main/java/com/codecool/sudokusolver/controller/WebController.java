@@ -1,6 +1,5 @@
 package com.codecool.sudokusolver.controller;
 
-import com.codecool.sudokusolver.model.SudokuCellList;
 import com.codecool.sudokusolver.service.ISudokuSolver;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
