@@ -1,5 +1,7 @@
 package com.codecool.sudokusolver;
 
+import com.codecool.sudokusolver.model.SudokuCell;
+import com.codecool.sudokusolver.model.SudokuCellList;
 import com.codecool.sudokusolver.service.FileParser;
 import com.codecool.sudokusolver.service.ISudokuSolver;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.*;
 import java.util.stream.IntStream;
 
@@ -61,17 +65,40 @@ public class Backtrack implements ISudokuSolver {
 
     @Override
     public void generateUserGrid(String[][] userGrid) throws IOException {
-        int[][] userGridToSolve = this.sudokuBoard;
+        int[][] userGridToSolve = new int[9][9];
 
         for(int i = 0; i < userGrid.length; i++){
             for(int k = 0; k < userGrid[i].length; k++) {
-                if(userGrid[i][k].equals(" ")){
+                if(userGrid[i][k].equals("")){
                     userGridToSolve[i][k] = 0;
                 } else {
                     userGridToSolve[i][k] = Integer.valueOf(userGrid[i][k]);
                 }
             }
         }
+        this.sudokuBoard = userGridToSolve;
+        for(int i = 0; i < this.sudokuBoard.length; i++){
+            System.out.println(Arrays.toString(this.sudokuBoard[i]));
+        }
+    }
+
+    @Override
+    public String[][] getUserGrid(SudokuCellList sudokuCellList) throws IOException {
+        String[][] userGrid = new String[9][9];
+        int counter = 0;
+
+        List<SudokuCell> sudokuCells = sudokuCellList.getSudokuCells();
+
+        for(int i = 0; i < 9; i++) {
+            for(int k = 0; k < 9; k++) {
+                userGrid[i][k] = sudokuCells.get(counter).getValue();
+                counter++;
+            }
+        }
+
+
+
+        return userGrid;
     }
 
 

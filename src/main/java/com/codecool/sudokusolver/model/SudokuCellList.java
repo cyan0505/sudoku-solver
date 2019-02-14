@@ -7,8 +7,15 @@ import java.util.ArrayList;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SudokuCellList {
 
-    private ArrayList<SudokuCell> sudokuCells;
+    private ArrayList<SudokuCell> sudokuCells = new ArrayList<>();
+//
+//    public SudokuCellList() {
+//        sudokuCells = new ArrayList<>();
+//    }
 
+    public SudokuCellList(ArrayList<SudokuCell> sudokuCells) {
+        this.sudokuCells = sudokuCells;
+    }
 
     public ArrayList<SudokuCell> getSudokuCells() {
         return sudokuCells;
@@ -16,5 +23,12 @@ public class SudokuCellList {
 
     public void setSudokuCells(ArrayList<SudokuCell> sudokuCells) {
         this.sudokuCells = sudokuCells;
+    }
+
+    @Override
+    public String toString() {
+        return "SudokuCellList{" +
+                "sudokuCells=" + sudokuCells +
+                '}';
     }
 }

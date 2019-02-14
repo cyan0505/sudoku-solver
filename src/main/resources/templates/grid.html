@@ -187,7 +187,7 @@
                 </tr>
             </table>
 
-            <button id="btnSolve" type="submit" class="btn btn-success btn-lg">Solve!</button>
+            <button id="btnSolve" type="button" class="btn btn-success btn-lg" onclick="getAllCells()">Solve!</button>
 
         </form>
     </div>
@@ -217,7 +217,7 @@
 
 <script>
 
-    function dupa() {
+    function getAllCells() {
 
         var sudokuCellList = [];
 
@@ -225,26 +225,38 @@
             var cell = document.getElementById("cell" + i);
 
 
-            var sudokuCell = new SudokuCell(cell.name, cell.value);
+            var sudokuCell = new SudokuCell(cell.id, cell.value);
             sudokuCellList.push(sudokuCell);
         }
 
         // var userGridJSON = $("#userGrid").find('input').serializeArray();
         // console.log(userGridJSON);
-        alert(JSON.stringify(userGridJSON));
-        for(var k = 0; k < sudokuCellList.length; k++){
-            console.log(sudokuCellList[k]);
-        }
-        // alert(JSON.stringify(sudokuCellList.toString()));
+        // alert(JSON.stringify(userGridJSON));
+        // for(var k = 0; k < sudokuCellList.length; k++){
+        //     console.log(sudokuCellList[k]);
+        // }
 
+        var httpRequest = new XMLHttpRequest();
+
+        httpRequest.onreadystatechange = function () {
+            if(httpRequest.readyState === 4 && httpRequest.status === 200) {
+                $("html").html(httpRequest.responseText);
+            }
+        };
+        var json = "{\"sudokuCells\": " + JSON.stringify(sudokuCellList) + "}";
+        console.log(json);
+        httpRequest.open('POST', '/userGrid');
+        httpRequest.send(json);
     }
 
     class SudokuCell {
-        constructor(name, value){
-            this.name = name;
+        constructor(id, value) {
+            this.id = id;
             this.value = value;
         }
+
     }
+
 
 
 </script>

@@ -4,15 +4,17 @@ import com.codecool.sudokusolver.model.SudokuCellList;
 import com.codecool.sudokusolver.service.ISudokuSolver;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
 @Controller
 public class WebController {
@@ -36,7 +38,6 @@ public class WebController {
     }
 
 
-
     @PostMapping("/sudoku")
     public String handleSudokuBoard(@RequestParam MultipartFile file, Model model) throws IOException {
         this.fileName = file.getOriginalFilename();
@@ -46,25 +47,27 @@ public class WebController {
     }
 
     @PostMapping("/userGrid")
-    public String handleManualGrid(SudokuCellList cell, Model model) throws IOException {
+    public String handleManualGrid(HttpEntity<String> request, Model model) throws IOException {
+
+        Gson g = new Gson();
+        String json = request.getBody();
+        System.out.println("JSON :" + json);
+        SudokuCellList sudokuCells = g.fromJson(json, SudokuCellList.class);
+        System.out.println("\n\nSudoku: " + sudokuCells);
 
 
+        String[][] userGrid = sudokuSolver.getUserGrid(sudokuCells);
 
-        System.out.println("USER GRID");
-        System.out.println(cell);
+        for(int i = 0; i < userGrid.length; i++){
+            System.out.println(Arrays.toString(userGrid[i]));
+        }
 
-//        Gson g = new Gson();
-//        SudokuCellList sudokuCells = g.fromJson(jsonGrid, SudokuCellList.class);
-
-//        System.out.println(sudokuCells.getSudokuCells());
-
-//        sudokuSolver.generateUserGrid(userGrid);
+        sudokuSolver.generateUserGrid(userGrid);
         model.addAttribute("solvedSudoku", sudokuSolver.solve());
         model.addAttribute("time", sudokuSolver.elapsedTime());
+        System.out.println("WESZLO!!!!");
         return "result";
     }
-
-
 
 
     @PostMapping("/example")
@@ -73,15 +76,15 @@ public class WebController {
 
         this.fileName = grid;
 
-        if(grid.equals("Grid one")) {
+        if (grid.equals("Grid one")) {
             file = new File("src/main/resources/sudoku/grid1.txt");
-        } else if(grid.equals("Grid two")) {
+        } else if (grid.equals("Grid two")) {
             file = new File("src/main/resources/sudoku/grid2.txt");
-        } else if(grid.equals("Grid three")) {
+        } else if (grid.equals("Grid three")) {
             file = new File("src/main/resources/sudoku/grid3.txt");
-        } else if(grid.equals("Grid four")) {
+        } else if (grid.equals("Grid four")) {
             file = new File("src/main/resources/sudoku/grid4.txt");
-        } else if(grid.equals("Worlds hardest sudoku")) {
+        } else if (grid.equals("Worlds hardest sudoku")) {
             file = new File("src/main/resources/sudoku/worlds_hardest_sudoku.txt");
         }
 
@@ -109,6 +112,11 @@ public class WebController {
     @GetMapping("/grid")
     public String handleUserGrid() {
         return "grid";
+    }
+
+    @GetMapping("/userGrid")
+    public String handleManualGrid() {
+        return "result";
     }
 
 
