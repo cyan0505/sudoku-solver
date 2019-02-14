@@ -1,58 +1,40 @@
 package com.codecool.sudokusolver.service;
 
+import com.codecool.sudokusolver.model.Cell;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
+
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @Component
 public class FileParser {
 
+    public List<Cell> parseFile(MultipartFile multipartFile) {
+        List<Cell> cells = new ArrayList<>();
+        try {
+            File file = convertFile(multipartFile);
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            int rowCounter = 0;
+            cells = new ArrayList<>();
 
-    public int[][] parseFile(MultipartFile multipartFile) throws IOException {
+            String line;
+            while ((line = reader.readLine()) != null) {
 
-        File file = convertFile(multipartFile);
-        BufferedReader reader = new BufferedReader(new FileReader(file));
-        List<String> lines = new ArrayList<>();
-        int counter = 0;
-        int[][] board = new int[9][9];
-        String line = null;
-
-        while((line = reader.readLine()) != null) {
-
-            String[] row = line.split(",");
-            int[] sudokuRow = Arrays.asList(row).stream().mapToInt(Integer::parseInt).toArray();
-            System.arraycopy(sudokuRow, 0, board[counter], 0, sudokuRow.length);
-            counter++;
+                String[] row = line.split(",");
+                for (int column = 0; column < row.length; column++) {
+                    cells.add(new Cell(rowCounter, column, Integer.valueOf(row[column])));
+                }
+                rowCounter++;
+            }
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        reader.close();
-        return board;
+        return Collections.synchronizedList(cells);
     }
-
-
-    public int[][] parseExampleFile(File file) throws IOException {
-
-        BufferedReader reader = new BufferedReader(new FileReader(file));
-        List<String> lines = new ArrayList<>();
-        int counter = 0;
-        int[][] board = new int[9][9];
-        String line = null;
-
-        while((line = reader.readLine()) != null) {
-
-            String[] row = line.split(",");
-            int[] sudokuRow = Arrays.asList(row).stream().mapToInt(Integer::parseInt).toArray();
-            System.arraycopy(sudokuRow, 0, board[counter], 0, sudokuRow.length);
-            counter++;
-        }
-        reader.close();
-        return board;
-
-    }
-
-
 
     private File convertFile(MultipartFile file) throws IOException{
         File convFile = new File(file.getOriginalFilename());
@@ -62,6 +44,4 @@ public class FileParser {
         fos.close();
         return convFile;
     }
-
-
 }
