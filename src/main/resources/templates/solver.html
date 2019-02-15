@@ -24,7 +24,7 @@
     
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" th:href="home">sudoku solver</a>
+        <a class="navbar-brand" th:href="home">Sudoku solver</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -61,11 +61,10 @@
                         <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Sudoku examples:</label>
                         <select name="grid" class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" onchange="this.form.submit()">
                             <option selected>Choose...</option>
-                            <option value="Grid one">Grid One</option>
-                            <option value="Grid two">Grid Two</option>
-                            <option value="Grid three">Grid Three</option>
-                            <option value="Grid four">Grid Four</option>
-                            <option value="Worlds hardest sudoku">World's hardest sudoku</option>
+                            <option value="easy.txt">Easy</option>
+                            <option value="medium.txt">Medium</option>
+                            <option value="hard.txt">Hard</option>
+                            <option value="whs.txt">World's hardest sudoku</option>
                         </select>
                     </div>
 
@@ -77,25 +76,23 @@
 
 
                 <!-- FILE -->
-                <form id="uploadForm" method="POST" action="/sudoku" enctype="multipart/form-data">
+                <form id="uploadForm" method="POST" action="/upload" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="exampleFormControlFile1">Input your sudoku file here!</label>
                         <input type="file" name="file" class="form-control-file" id="exampleFormControlFile1" onchange="fileValidation()">
                     </div>
                     <!-- UPLOAD -->
-                    <button id="uploadBtn" type="submit" class="btn btn-primary btn-lg" disabled><i class="fas fa-arrow-up"></i> Upload</button>
+                    <button id="uploadBtn" type="submit" class="btn btn-primary btn-lg" disabled><i class="fas fa-arrow-up"></i>Upload</button>
                 </form>
                 <form method="POST" action="/solver" class="my-5">
                     <!-- BUTTON -->
-                    <button type="submit" class="btn btn-success btn-lg"><i class="fas fa-th"></i> Solve!</button>
+                    <button type="submit" class="btn btn-success btn-lg"><i class="fas fa-th"></i>Solve!</button>
                 </form>
 
             </div>
 
             <div class="d-flex order-0 order-md-1 justify-content-center">
                 <!-- SUDOKU -->
-
-
                 <table th:class="'b-table'">
                     <tr>
                         <td class="cell">2</td>
@@ -149,7 +146,8 @@
                         <td class="cell"></td>
                         <td class="cell">8</td>
                     </tr>
-                    <tr>                        <td class="cell"></td>
+                    <tr>
+                        <td class="cell"></td>
                         <td class="cell"></td>
                         <td class="cell b-right"></td>
 
@@ -215,20 +213,11 @@
                     </tr>
                 </table>
             </div>
-
-
     </div>
-
-    <!--<footer class="footer d-flex justify-content-center py-0">-->
-        <!--<span class="text-muted">Project made for Codecool programming course.</span>-->
-    <!--</footer>-->
-
     <div class="footer d-flex justify-content-center">
         <span class="text-muted">Project made for Codecool programming course.</span>
     </div>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"

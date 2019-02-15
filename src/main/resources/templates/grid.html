@@ -25,7 +25,7 @@
 
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" th:href="home">sudoku solver</a>
+    <a class="navbar-brand" th:href="home">Sudoku solver</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -195,71 +195,18 @@
 
 </div>
 
-<!--<footer class="footer d-flex justify-content-center py-0">-->
-<!--<span class="text-muted">Project made for Codecool programming course.</span>-->
-<!--</footer>-->
-
 <div class="footer d-flex justify-content-center">
     <span class="text-muted">Project made for Codecool programming course.</span>
 </div>
 
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
         crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
-<!--<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>-->
 
 <script th:src="script.js"></script>
-
-<script>
-
-    function getAllCells() {
-
-        var sudokuCellList = [];
-
-        for(var i = 1; i <= 81; i++) {
-            var cell = document.getElementById("cell" + i);
-
-
-            var sudokuCell = new SudokuCell(cell.id, cell.value);
-            sudokuCellList.push(sudokuCell);
-        }
-
-        // var userGridJSON = $("#userGrid").find('input').serializeArray();
-        // console.log(userGridJSON);
-        // alert(JSON.stringify(userGridJSON));
-        // for(var k = 0; k < sudokuCellList.length; k++){
-        //     console.log(sudokuCellList[k]);
-        // }
-
-        var httpRequest = new XMLHttpRequest();
-
-        httpRequest.onreadystatechange = function () {
-            if(httpRequest.readyState === 4 && httpRequest.status === 200) {
-                $("html").html(httpRequest.responseText);
-            }
-        };
-        var json = "{\"sudokuCells\": " + JSON.stringify(sudokuCellList) + "}";
-        console.log(json);
-        httpRequest.open('POST', '/userGrid');
-        httpRequest.send(json);
-    }
-
-    class SudokuCell {
-        constructor(id, value) {
-            this.id = id;
-            this.value = value;
-        }
-
-    }
-
-
-
-</script>
 
 </body>
 </html>
