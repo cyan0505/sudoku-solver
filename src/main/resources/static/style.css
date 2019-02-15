@@ -124,3 +124,33 @@ h2 {
 }
 
 
+/*MEDIA QUERY*/
+
+@media (max-width: 1200px) {
+    .cell {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+@media (max-width: 750px) {
+    .cell {
+        width: 60px;
+        height: 60px;
+    }
+
+    .btn-solve {
+        width: 300px;
+    }
+
+    .btn-upload {
+        width: 100%;
+        margin-top: 15px;
+    }
+
+    .btn-userGrid {
+        width: 100%;
+    }
+}
+
+
