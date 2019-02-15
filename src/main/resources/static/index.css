@@ -8,15 +8,6 @@ body {
 }
 
 
-@media (max-width: 700px) {
-    body {
-        background-image: url("game-sm.jpg");
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-    }
-}
-
 h1 {
     font-weight: 700;
     font-size: 5rem;
@@ -43,4 +34,17 @@ hr {
     border-radius: 50px;
     text-align: center;
     padding: 10px 30px;
+}
+
+@media (max-width: 700px) {
+    body {
+        background-image: url("game-sm.jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .content {
+        padding-top: 35%;
+    }
 }
