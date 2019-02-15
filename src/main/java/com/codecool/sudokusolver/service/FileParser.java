@@ -29,7 +29,7 @@ public class FileParser {
 
         File file = convertFile(multipartFile);
         List<Cell> cells = fromFileToCells(file);
-
+        file.delete();
         return new Sudoku(Collections.synchronizedList(cells));
     }
 
