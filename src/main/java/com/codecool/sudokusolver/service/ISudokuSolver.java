@@ -1,15 +1,15 @@
 package com.codecool.sudokusolver.service;
 
+import com.codecool.sudokusolver.model.SudokuResult;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.ExecutionException;
 
 public interface ISudokuSolver {
-   int[][] solve() throws IOException;
-   int[][] uploadBoard(MultipartFile file) throws IOException;
-   int[][] uploadExampleBoard(File file) throws IOException;
-   void generateUserGrid(String[][] userGrid) throws IOException;
-   String[][] getUserGrid(SudokuCellList sudokuCellList) throws IOException;
-   long elapsedTime();
+    SudokuResult solve(MultipartFile file) throws IOException, ExecutionException, InterruptedException;
+    SudokuResult solve(int[] cellsValues) throws IOException, ExecutionException, InterruptedException;
+    int[][] uploadBoard(MultipartFile file) throws IOException;
+    int[][] uploadExampleBoard(File file) throws IOException;
 }
