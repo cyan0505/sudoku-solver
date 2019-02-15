@@ -112,6 +112,4 @@ public class WebController {
     public String handleManualGrid() {
         return "result";
     }
-
-
 }
