@@ -16,9 +16,9 @@ public class SudokuTest {
     @Test
     public void testDeepCopy() throws IOException {
         FileParser parser = new FileParser();
-        File file = new File("/home/bartosz/Codecool/Advanced/sudoku-solver/worlds_hardest_sudoku.txt");
+        File file = new File("/home/bartosz/Codecool/Advanced/sudoku-solver/whs.txt");
         MultipartFile multipartFile = new MockMultipartFile("file", file.getName(), "text/plain", Files.readAllBytes(file.toPath()));
-        Sudoku sudoku = new Sudoku(parser.parseFile(multipartFile));
+        Sudoku sudoku = parser.parseFile(parser.convertFile(multipartFile));
 
         Sudoku result = sudoku.deepCopy();
 
