@@ -1,5 +1,7 @@
 package com.codecool.sudokusolver.controller;
 
+import com.codecool.sudokusolver.model.CellDTO;
+import com.codecool.sudokusolver.model.CellListDTO;
 import com.codecool.sudokusolver.model.SudokuResult;
 import com.codecool.sudokusolver.service.ISudokuSolver;
 import com.google.gson.Gson;
@@ -14,9 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.lang.reflect.Type;
-import java.util.Arrays;
+import java.util.List;
 
 
 @Controller
@@ -29,16 +29,21 @@ public class WebController {
     }
 
 
-    @PostMapping("/solver")
-    public String handleSolvedSudoku(@RequestParam MultipartFile file, Model model) {
+    @PostMapping("/solve")
+    public String handleSolvedSudoku(HttpEntity<String> request, Model model) {
+        Gson g = new Gson();
+        String json = request.getBody();
+        CellListDTO sudokuCells = g.fromJson(json, CellListDTO.class);
+        List<CellDTO> cells = sudokuCells.getSudokuCells();
+        int[] values = cells.stream().mapToInt(cellDTO -> Integer.valueOf(cellDTO.getValue())).toArray();
         SudokuResult sudokuResult;
         try {
-            sudokuResult = sudokuSolver.solve(file);
+            sudokuResult = sudokuSolver.solve(values);
         } catch (Exception e) {
             return "error";
         }
         model.addAttribute("solvedSudoku", sudokuResult.getSudoku());
-        model.addAttribute("fileName", file.getName());
+        model.addAttribute("fileName", "Unknown");
         model.addAttribute("time", sudokuResult.getElapsedTime());
         return "result";
     }
@@ -54,27 +59,6 @@ public class WebController {
         return "sudoku";
     }
 
-    @PostMapping("/userGrid")
-    public String handleManualGrid(HttpEntity<String> request, Model model) {
-
-        Gson g = new Gson();
-        String json = request.getBody();
-        System.out.println("JSON :" + json);
-        int[] sudokuCells = g.fromJson(json, (Type) Array.class);
-
-        System.out.println("\n\nSudoku: " + Arrays.toString(sudokuCells));
-        SudokuResult sudokuResult;
-        try {
-            sudokuResult = sudokuSolver.solve(sudokuCells);
-        } catch (Exception e) {
-            return "error";
-        }
-
-        model.addAttribute("solvedSudoku", sudokuResult.getSudoku());
-        model.addAttribute("time", sudokuResult.getElapsedTime());
-        return "result";
-    }
-
 
     @PostMapping("/example")
     public String handleExampleSudokuBoard(@RequestParam("grid") String grid, Model model)  {
@@ -84,6 +68,7 @@ public class WebController {
         } catch (IOException e) {
             return "error";
         }
+        model.addAttribute("fileName", grid.split("\\.")[0]);
         return "example";
     }
 
