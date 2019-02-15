@@ -15,6 +15,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
           crossorigin="anonymous">
 
+    <!-- In <head> after the Bootstrap CSS. -->
+    <link rel="stylesheet" href="https://unpkg.com/@bootstrapstudio/bootstrap-better-nav/dist/bootstrap-better-nav.min.css">
+
     <!-- Custom CSS -->
     <link rel="stylesheet" th:href="style.css">
     <link rel="stylesheet" th:href="style_2.css">
@@ -201,70 +204,72 @@
     <span class="text-muted">Project made for Codecool programming course.</span>
 </div>
 
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-        crossorigin="anonymous"></script>
-<!--<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>-->
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
+    <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>-->
+    <!-- At the end of <body>, after jQuery and the Bootstrap js -->
+    <script src="https://unpkg.com/@bootstrapstudio/bootstrap-better-nav/dist/bootstrap-better-nav.min.js"></script>
 
-<script th:src="script.js"></script>
+    <script th:src="script.js"></script>
 
-<script>
+    <script>
 
-    function getAllCells() {
+        function getAllCells() {
 
-        var sudokuCellList = [];
+            var sudokuCellList = [];
 
-        for(var i = 1; i <= 81; i++) {
+            for(var i = 1; i <= 81; i++) {
 
-            var cell = document.getElementById("cell" + i);
-            var sudokuCell = new SudokuCell(cell.id, cell.value);
-            sudokuCellList.push(sudokuCell);
-        }
-
-        var httpRequest = new XMLHttpRequest();
-
-        httpRequest.onreadystatechange = function () {
-            if(httpRequest.readyState === 4 && httpRequest.status === 200) {
-                $("html").html(httpRequest.responseText);
+                var cell = document.getElementById("cell" + i);
+                var sudokuCell = new SudokuCell(cell.id, cell.value);
+                sudokuCellList.push(sudokuCell);
             }
-        };
 
-        var json = "{\"sudokuCells\": " + JSON.stringify(sudokuCellList) + "}";
+            var httpRequest = new XMLHttpRequest();
 
-        httpRequest.open('POST', '/userGrid');
-        httpRequest.send(json);
-    }
+            httpRequest.onreadystatechange = function () {
+                if(httpRequest.readyState === 4 && httpRequest.status === 200) {
+                    $("html").html(httpRequest.responseText);
+                }
+            };
 
-    class SudokuCell {
-        constructor(id, value) {
-            this.id = id;
-            this.value = value;
+            var json = "{\"sudokuCells\": " + JSON.stringify(sudokuCellList) + "}";
+
+            httpRequest.open('POST', '/userGrid');
+            httpRequest.send(json);
         }
 
-    }
-
-
-    $(":input").keyup(function(){
-        var input = $(this).val();
-
-        var inputID = input.id;
-        var regex = new RegExp("^[1-9]$");
-        if(regex.test(input) || input == "") {
-
-        }else {
-            alert("Please enter only number in range 1 - 9.");
-            $(this).val(input.substring(0,input.length-1));
+        class SudokuCell {
+            constructor(id, value) {
+                this.id = id;
+                this.value = value;
+            }
 
         }
-    });
 
 
-</script>
+        $(":input").keyup(function(){
+            var input = $(this).val();
+
+            var inputID = input.id;
+            var regex = new RegExp("^[1-9]$");
+            if(regex.test(input) || input == "") {
+
+            }else {
+                alert("Please enter only number in range 1 - 9.");
+                $(this).val(input.substring(0,input.length-1));
+
+            }
+        });
+
+
+    </script>
 
 </body>
 </html>
