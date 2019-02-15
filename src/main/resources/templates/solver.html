@@ -61,10 +61,10 @@
                         <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Sudoku examples:</label>
                         <select name="grid" class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" onchange="this.form.submit()">
                             <option selected>Choose...</option>
-                            <option value="easy.txt">Easy</option>
-                            <option value="medium.txt">Medium</option>
-                            <option value="hard.txt">Hard</option>
-                            <option value="whs.txt">World's hardest sudoku</option>
+                            <option value="Easy.txt">Easy</option>
+                            <option value="Medium.txt">Medium</option>
+                            <option value="Hard.txt">Hard</option>
+                            <option value="World's-hardest-sudoku.txt">World's hardest sudoku</option>
                         </select>
                     </div>
 
@@ -84,132 +84,21 @@
                     <!-- UPLOAD -->
                     <button id="uploadBtn" type="submit" class="btn btn-primary btn-lg" disabled><i class="fas fa-arrow-up"></i>Upload</button>
                 </form>
-                <form method="POST" action="/solver" class="my-5">
-                    <!-- BUTTON -->
-                    <button type="submit" class="btn btn-success btn-lg"><i class="fas fa-th"></i>Solve!</button>
-                </form>
-
+                <button id="btnSolve" type="button" class="btn btn-success btn-lg" onclick="getAllCells()">Solve!</button>
             </div>
 
             <div class="d-flex order-0 order-md-1 justify-content-center">
                 <!-- SUDOKU -->
-                <table th:class="'b-table'">
-                    <tr>
-                        <td class="cell">2</td>
-                        <td class="cell"></td>
-                        <td class="cell b-right"></td>
-
-                        <td class="cell"></td>
-                        <td class="cell">8</td>
-                        <td class="cell b-right"></td>
-
-                        <td class="cell">3</td>
-                        <td class="cell"></td>
-                        <td class="cell"></td>
-                    </tr>
-                    <tr>
-                        <td class="cell"></td>
-                        <td class="cell">6</td>
-                        <td class="cell b-right"></td>
-
-                        <td class="cell"></td>
-                        <td class="cell">7</td>
-                        <td class="cell b-right"></td>
-
-                        <td class="cell"></td>
-                        <td class="cell">8</td>
-                        <td class="cell">4</td>
-                    </tr>
-                    <tr th:class="'b-bottom-row'">
-                        <td class="cell"></td>
-                        <td class="cell">3</td>
-                        <td class="cell b-right"></td>
-
-                        <td class="cell">5</td>
-                        <td class="cell"></td>
-                        <td class="cell b-right"></td>
-
-                        <td class="cell">2</td>
-                        <td class="cell"></td>
-                        <td class="cell">9</td>
-                    </tr>
-                    <tr>
-                        <td class="cell"></td>
-                        <td class="cell"></td>
-                        <td class="cell b-right"></td>
-
-                        <td class="cell">1</td>
-                        <td class="cell"></td>
-                        <td class="cell b-right">5</td>
-
-                        <td class="cell">4</td>
-                        <td class="cell"></td>
-                        <td class="cell">8</td>
-                    </tr>
-                    <tr>
-                        <td class="cell"></td>
-                        <td class="cell"></td>
-                        <td class="cell b-right"></td>
-
-                        <td class="cell"></td>
-                        <td class="cell"></td>
-                        <td class="cell b-right"></td>
-
-                        <td class="cell"></td>
-                        <td class="cell"></td>
-                        <td class="cell"></td>
-                    </tr>
-                    <tr th:class="'b-bottom-row'">
-                        <td class="cell">4</td>
-                        <td class="cell"></td>
-                        <td class="cell b-right">2</td>
-
-                        <td class="cell">7</td>
-                        <td class="cell"></td>
-                        <td class="cell b-right">6</td>
-
-                        <td class="cell"></td>
-                        <td class="cell"></td>
-                        <td class="cell"></td>
-                    </tr>
-                    <tr>
-                        <td class="cell">3</td>
-                        <td class="cell"></td>
-                        <td class="cell b-right">1</td>
-
-                        <td class="cell"></td>
-                        <td class="cell"></td>
-                        <td class="cell b-right">7</td>
-
-                        <td class="cell"></td>
-                        <td class="cell">4</td>
-                        <td class="cell"></td>
-                    </tr>
-                    <tr>
-                        <td class="cell">7</td>
-                        <td class="cell">2</td>
-                        <td class="cell b-right"></td>
-
-                        <td class="cell"></td>
-                        <td class="cell">4</td>
-                        <td class="cell b-right"></td>
-
-                        <td class="cell"></td>
-                        <td class="cell">6</td>
-                        <td class="cell"></td>
-                    </tr>
-                    <tr>
-                        <td class="cell"></td>
-                        <td class="cell"></td>
-                        <td class="cell b-right">4</td>
-
-                        <td class="cell"></td>
-                        <td class="cell">1</td>
-                        <td class="cell b-right"></td>
-
-                        <td class="cell"></td>
-                        <td class="cell"></td>
-                        <td class="cell">3</td>
+                <table th:class="'b-table'" id="userGrid">
+                    <tr th:each="i: ${#numbers.sequence(0, 8)}"  th:class="'cell b-bottom'">
+                        <th:block th:each="j: ${#numbers.sequence(0, 8)}">
+                            <td th:if="${j % 3 == 0}" th:class="'cell b-right'">
+                                <input th:class="'cell-input'" type="number" data-cell="cell">
+                            </td>
+                            <td th:if="${j % 3 != 0}" th:class="cell">
+                                <input th:class="'cell-input'" type="number" data-cell="cell">
+                            </td>
+                        </th:block>
                     </tr>
                 </table>
             </div>

@@ -61,10 +61,10 @@
                 <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Sudoku examples:</label>
                 <select name="grid" class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" onchange="this.form.submit()">
                     <option selected>Choose...</option>
-                    <option value="easy.txt">Easy</option>
-                    <option value="medium.txt">Medium</option>
-                    <option value="hard.txt">Hard</option>
-                    <option value="whs.txt">World's hardest sudoku</option>
+                    <option value="Easy.txt">Easy</option>
+                    <option value="Medium.txt">Medium</option>
+                    <option value="Hard.txt">Hard</option>
+                    <option value="World's-hardest-sudoku.txt">World's hardest sudoku</option>
                 </select>
             </div>
 
@@ -79,21 +79,18 @@
             <!-- UPLOAD -->
             <button id="uploadBtn" type="submit" class="btn btn-primary btn-lg" disabled><i class="fas fa-arrow-up"></i>Upload</button>
         </form>
-        <form method="POST" action="/solver" class="my-5">
-            <!-- BUTTON -->
-            <button type="submit" class="btn btn-success btn-lg"><i class="fas fa-th"></i>Solve!</button>
-        </form>
+        <button id="btnSolve" type="button" class="btn btn-success btn-lg" onclick="getAllCells()">Solve!</button>
+
 
     </div>
 
     <div class="d-flex order-0 order-md-1 justify-content-center">
         <!-- SUDOKU -->
         <table th:class="'b-table'">
-
             <tr th:each="element : ${sudoku}" th:class="'cell b-bottom'">
                 <th:block th:each="value : ${element}" >
-                    <td th:if="${value != 0}" th:text="${value}" th:class="'cell b-right'"></td>
-                    <td th:if="${value == 0}" th:text="${' '}" th:class="'cell b-right'"></td>
+                    <td th:if="${value != 0}" th:value="${value}" th:text="${value}" th:class="'cell b-right'" data-cell="cell"/>
+                    <td th:if="${value == 0}" th:value="${' '}"  th:text="${' '}" th:class="'cell b-right'" data-cell="cell"/>
                 </th:block>
             </tr>
         </table>

@@ -78,25 +78,18 @@
             <!-- UPLOAD -->
             <button id="uploadBtn" type="submit" class="btn btn-primary btn-lg" disabled><i class="fas fa-arrow-up"></i>Upload</button>
         </form>
-        <form method="POST" action="/solver" class="my-5">
-            <!-- BUTTON -->
-            <button type="submit" class="btn btn-success btn-lg"><i class="fas fa-th"></i>Solve!</button>
-        </form>
-
+        <button id="btnSolve" type="button" class="btn btn-success btn-lg" onclick="getAllCells()">Solve!</button>
     </div>
 
     <div class="d-flex order-0 order-md-1 justify-content-center">
         <!-- SUDOKU -->
-        <table th:class="'b-table'">
-
-            <tr th:each="element : ${solvedSudoku}" th:class="'cell b-bottom'">
+        <table th:class="'b-table'" id="userGrid">
+            <tr th:each="element : ${solvedSudoku}"  th:class="'cell b-bottom'">
                 <th:block th:each="value : ${element}" >
                     <td th:text="${value}" th:class="'cell b-right'"></td>
                 </th:block>
             </tr>
-
         </table>
-
     </div>
 
 
