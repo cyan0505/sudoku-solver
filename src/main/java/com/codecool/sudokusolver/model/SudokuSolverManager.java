@@ -3,21 +3,17 @@ package com.codecool.sudokusolver.model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
-import java.util.concurrent.*;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
-public class SudokuSolverManager implements Callable<Sudoku> {
+public class SudokuSolverManager {
 
-    private Sudoku sudoku;
-
-    public SudokuSolverManager(Sudoku sudoku) {
-        this.sudoku = sudoku;
-    }
-
-    @Override
-    public Sudoku call() throws ExecutionException, InterruptedException {
+    public static Sudoku solve(Sudoku sudokuToSolve) throws ExecutionException, InterruptedException {
         List<Future<Sudoku>> futures = new ArrayList<>();
         ExecutorService executorService = Executors.newSingleThreadExecutor();
-        futures.add(executorService.submit(new SudokuSolver(sudoku)));
+        futures.add(executorService.submit(new SudokuSolver(sudokuToSolve)));
         ListIterator<Future<Sudoku>> listIterator = futures.listIterator();
         while (listIterator.hasNext()) {
             Future<Sudoku> future = listIterator.next();
