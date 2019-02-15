@@ -27,7 +27,7 @@ public class SudokuService implements ISudokuSolver{
         long starttime = System.currentTimeMillis();
         Sudoku solvedSudoku = SudokuSolverManager.solve(sudoku);
         long endtime = System.currentTimeMillis();
-        return new SudokuResult(SudokuUtils.convertSudokuToIntArray(solvedSudoku), starttime - endtime);
+        return new SudokuResult(SudokuUtils.convertSudokuToIntArray(solvedSudoku),  endtime - starttime);
     }
 
     @Override
@@ -36,7 +36,7 @@ public class SudokuService implements ISudokuSolver{
         Sudoku solvedSudoku = SudokuSolverManager.solve(SudokuUtils.convertIntArrayToSudoku(cellsValues));
         long endtime = System.currentTimeMillis();
 
-        return new SudokuResult(SudokuUtils.convertSudokuToIntArray(solvedSudoku), starttime - endtime);
+        return new SudokuResult(SudokuUtils.convertSudokuToIntArray(solvedSudoku), endtime - starttime);
     }
 
     @Override
