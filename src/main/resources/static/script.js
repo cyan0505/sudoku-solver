@@ -21,14 +21,24 @@ function fileValidation() {
     }
 }
 
+function getAllCells() {
 
-// $(function() {
-//     $("#btnSolve").bind("click", function() {
-//         console.log("dupa");
-//         var userGridJSON = $("#userGrid").find('input').serializeArray();
-//         console.log(userGridJSON);
-//         alert(JSON.stringify(userGridJSON));
-//     });
-// });
+    var sudokuCellList = [];
 
+    for (let i = 1; i <= 81; i++) {
+        let cell = document.getElementById("cell" + i);
+        sudokuCellList.push(cell.value);
+    }
 
+    let httpRequest = new XMLHttpRequest();
+
+    httpRequest.onreadystatechange = function () {
+        if (httpRequest.readyState === 4 && httpRequest.status === 200) {
+            $("html").html(httpRequest.responseText);
+        }
+    };
+    let json = "{\"sudokuCells\": " + JSON.stringify(sudokuCellList) + "}";
+    console.log(json);
+    httpRequest.open('POST', '/userGrid');
+    httpRequest.send(json);
+}
