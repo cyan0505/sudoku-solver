@@ -1,6 +1,7 @@
 ### Sudoku solver
 
   Web app which solve sudoku with multithread approach.
+  Hosted on: https://sudoku-solver-p.herokuapp.com/
   
 ### Requirements
 1.
