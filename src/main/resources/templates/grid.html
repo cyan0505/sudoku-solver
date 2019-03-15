@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/xhtml">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:100,200,300,400,700" rel="stylesheet">
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" th:href="style.css">
+    <link rel="stylesheet" th:href="style_2.css">
+
+    <title>Sudoku solver</title>
+</head>
+<body>
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" th:href="home">sudoku solver</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" th:href="home">Home</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" th:href="solver">Solver</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="about">About</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container d-flex flex-column flex-md-row justify-content-between my-5">
+    <div class="d-flex flex-column order-1 order-md-0 align-items-start my-5 my-md-0">
+        <div class="mb-auto">
+            <!-- STATISTICS -->
+            <h1>Statistics</h1>
+            <h3>Time elapsed:</h3>
+            <h4>-----------</h4>
+        </div>
+
+
+
+        <form method="POST" action="/solver" class="my-5">
+            <!-- BUTTON -->
+            <button type="submit" class="btn btn-success btn-lg"><i class="fas fa-th"></i> Solve!</button>
+        </form>
+
+    </div>
+
+    <div class="d-flex order-0 order-md-1 justify-content-center">
+        <!-- SUDOKU -->
+
+        <form method="POST" action="/userGrid">
+
+            <table th:class="'b-table'" name="userGrid" id="userGrid">
+                <tr>
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell1" name="cell1" value="" onkeyup="enterNumber()"></td>
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell2" name="cell" value="" onkeyup="enterNumber()"></td>
+                    <td class="cell b-right"><input th:class="'cell-input'" type="text" id="cell3" name="cell3" value=""></td>
+
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell4" name="cell" value=""></td>
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell5" name="cell" value=""></td>
+                    <td class="cell b-right"><input th:class="'cell-input'" type="text" id="cell6" name="cell6" value=""></td>
+
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell7" name="cell7" value=""></td>
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell8" name="cell8" value=""></td>
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell9" name="cell9" value=""></td>
+                </tr>
+                <tr>
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell10" name="cell10" value=""></td>
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell11" name="cell11" value=""></td>
+                    <td class="cell b-right"><input th:class="'cell-input'" type="text" id="cell12" name="cell12" value=""></td>
+
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell13" name="cell13" value=""></td>
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell14" name="cell14" value=""></td>
+                    <td class="cell b-right"><input th:class="'cell-input'" type="text" id="cell15" name="cell15" value=""></td>
+
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell16" name="cell16" value=""></td>
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell17" name="cell17" value=""></td>
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell18" name="cell18" value=""></td>
+                </tr>
+                <tr th:class="'b-bottom-row'">
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell19" name="cell19" value=""></td>
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell20" name="cell20" value=""></td>
+                    <td class="cell b-right"><input th:class="'cell-input'" type="text" id="cell21" name="cell21" value=""></td>
+
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell22" name="cell22" value=""></td>
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell23" name="cell23" value=""></td>
+                    <td class="cell b-right"><input th:class="'cell-input'" type="text" id="cell24" name="cell24" value=""></td>
+
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell25" name="cell25" value=""></td>
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell26" name="cell26" value=""></td>
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell27" name="cell27" value=""></td>
+                </tr>
+                <tr>
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell28" name="cell28" value=""></td>
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell29" name="cell29" value=""></td>
+                    <td class="cell b-right"><input th:class="'cell-input'" type="text" id="cell30" name="cell30" value=""></td>
+
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell31" name="cell31" value=""></td>
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell32" name="cell32" value=""></td>
+                    <td class="cell b-right"><input th:class="'cell-input'" type="text" id="cell33" name="cell33" value=""></td>
+
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell34" name="cell34" value=""></td>
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell35" name="cell35" value=""></td>
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell36" name="cell36" value=""></td>
+                </tr>
+                <tr>
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell37" name="cell37" value=""></td>
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell38" name="cell38" value=""></td>
+                    <td class="cell b-right"><input th:class="'cell-input'" type="text" id="cell39" name="cell39" value=""></td>
+
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell40" name="cell40" value=""></td>
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell41" name="cell41" value=""></td>
+                    <td class="cell b-right"><input th:class="'cell-input'" type="text" id="cell42" name="cell42" value=""></td>
+
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell43" name="cell43" value=""></td>
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell44" name="cell44" value=""></td>
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell45" name="cell45" value=""></td>
+                </tr>
+                <tr th:class="'b-bottom-row'">
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell46" name="cell46" value=""></td>
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell47" name="cell47" value=""></td>
+                    <td class="cell b-right"><input th:class="'cell-input'" type="text" id="cell48" name="cell48" value=""></td>
+
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell49" name="cell49" value=""></td>
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell50" name="cell50" value=""></td>
+                    <td class="cell b-right"><input th:class="'cell-input'" type="text" id="cell51" name="cell51" value=""></td>
+
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell52" name="cell52" value=""></td>
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell53" name="cell53" value=""></td>
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell54" name="cell54" value=""></td>
+                </tr>
+                <tr>
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell55" name="cell55" value=""></td>
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell56" name="cell56" value=""></td>
+                    <td class="cell b-right"><input th:class="'cell-input'" type="text" id="cell57" name="cell57" value=""></td>
+
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell58" name="cell58" value=""></td>
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell59" name="cell59" value=""></td>
+                    <td class="cell b-right"><input th:class="'cell-input'" type="text" id="cell60" name="cell60" value=""></td>
+
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell61" name="cell61" value=""></td>
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell62" name="cell62" value=""></td>
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell63" name="cell63" value=""></td>
+                </tr>
+                <tr>
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell64" name="cell64" value=""></td>
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell65" name="cell65" value=""></td>
+                    <td class="cell b-right"><input th:class="'cell-input'" type="text" id="cell66" name="cell66" value=""></td>
+
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell67" name="cell67" value=""></td>
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell68" name="cell68" value=""></td>
+                    <td class="cell b-right"><input th:class="'cell-input'" type="text" id="cell69" name="cell69" value=""></td>
+
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell70" name="cell70" value=""></td>
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell71" name="cell71" value=""></td>
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell72" name="cell72" value=""></td>
+                </tr>
+                <tr>
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell73" name="cell73" value=""></td>
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell74" name="cell74" value=""></td>
+                    <td class="cell b-right"><input th:class="'cell-input'" type="text" id="cell75" name="cell75" value=""></td>
+
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell76" name="cell76" value=""></td>
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell77" name="cell77" value=""></td>
+                    <td class="cell b-right"><input th:class="'cell-input'" type="text" id="cell78" name="cell78" value=""></td>
+
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell79" name="cell79" value=""></td>
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell80" name="cell80" value=""></td>
+                    <td class="cell"><input th:class="'cell-input'" type="text" id="cell81" name="cell81" value=""></td>
+                </tr>
+            </table>
+
+            <button id="btnSolve" type="button" class="btn btn-success btn-lg" onclick="getAllCells()">Solve!</button>
+
+        </form>
+    </div>
+
+
+</div>
+
+<!--<footer class="footer d-flex justify-content-center py-0">-->
+<!--<span class="text-muted">Project made for Codecool programming course.</span>-->
+<!--</footer>-->
+
+<div class="footer d-flex justify-content-center">
+    <span class="text-muted">Project made for Codecool programming course.</span>
+</div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+<!--<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>-->
+
+<script th:src="script.js"></script>
+
+<script>
+
+    function getAllCells() {
+
+        var sudokuCellList = [];
+
+        for(var i = 1; i <= 81; i++) {
+
+            var cell = document.getElementById("cell" + i);
+            var sudokuCell = new SudokuCell(cell.id, cell.value);
+            sudokuCellList.push(sudokuCell);
+        }
+
+        var httpRequest = new XMLHttpRequest();
+
+        httpRequest.onreadystatechange = function () {
+            if(httpRequest.readyState === 4 && httpRequest.status === 200) {
+                $("html").html(httpRequest.responseText);
+            }
+        };
+
+        var json = "{\"sudokuCells\": " + JSON.stringify(sudokuCellList) + "}";
+
+        httpRequest.open('POST', '/userGrid');
+        httpRequest.send(json);
+    }
+
+    class SudokuCell {
+        constructor(id, value) {
+            this.id = id;
+            this.value = value;
+        }
+
+    }
+
+
+    $(":input").keyup(function(){
+        var input = $(this).val();
+
+        var inputID = input.id;
+        var regex = new RegExp("^[1-9]$");
+        if(regex.test(input) || input == "") {
+
+        }else {
+            alert("Please enter only number in range 1 - 9.");
+            $(this).val(input.substring(0,input.length-1));
+
+        }
+    });
+
+
+</script>
+
+</body>
+</html>

@@ -12,7 +12,6 @@
 
 ![](src/main/resources/static/sudoku.gif)
 
-
 ### Built with:
 1. Maven - Dependency Management
 2. Spring Boot

@@ -1,0 +1,88 @@
+
+
+body {
+    font-family: "Nunito", sans-serif;
+}
+
+.cell-input {
+    border: none;
+    width: 100%;
+    text-align: center;
+}
+
+/* CELL */
+.cell {
+
+    border: 1px solid black;
+    text-align: center;
+    width: 80px;
+    height: 80px;
+    padding: 0;
+    font-size: 20px;
+    font-weight: 200;
+
+}
+
+
+@media (max-width: 1200px) {
+    .cell {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+@media (max-width: 1000px) {
+    .cell {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+.b-right:nth-child(3n+0) {
+    border-right: 3px solid black;
+}
+
+.b-bottom-right {
+    border-bottom: 3px solid black;
+    border-right: 3px solid black;
+}
+
+.b-bottom:nth-child(3n+0) {
+    border-bottom: 3px solid black;
+}
+
+.b-bottom-row {
+    border-bottom: 3px solid black;
+}
+
+.b-table {
+    border: 3px solid black;
+}
+
+/* FOOTER */
+
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 40px;
+    background-color: #212529;
+}
+
+.text-muted {
+    color: #fff;
+}
+
+.jumbotron {
+
+    padding: 1rem 1rem;
+
+}
+
+/*IMAGE*/
+
+.image {
+    width: 600px;
+    height: 300px;
+}
